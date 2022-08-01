@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "hatch-fancy-readme"
+version = "22.1.0dev0"
+description = 'Fancy PyPI READMEs with Hatch'
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Hynek Schlawack", email = "hs@ox.cx" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["hatchling"]
+
+[project.entry-points.hatch]
+fancy_readme = "hatch_fancy_readme.hooks"
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+    "coverage",
+]
+dev = [
+    "hatch-fancy-readme[tests]",
+]
+
+
+[project.urls]
+Documentation = "https://github.com/hynek/hatch-fancy-readme#readme"
+Issues = "https://github.com/hynek/hatch-fancy-readme/issues"
+Source = "https://github.com/hynek/hatch-fancy-readme"
