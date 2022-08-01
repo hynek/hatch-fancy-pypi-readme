@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "my-pkg"
+version = "1.0"
+
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = '''# Level 1 Header
+
+This is *Markdown* in a literal string.
+
+Let's import `AUTHORS.md` without its header and last paragraph next:
+
+'''
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+file = "AUTHORS.md"
+start-after = "Authors\n"
+end-before = "A full"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "\n---\n\n**Bold Footer**"

@@ -4,42 +4,119 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "hatch-fancy-readme"
+name = "hatch-fancy-pypi-readme"
 version = "22.1.0dev0"
-description = 'Fancy PyPI READMEs with Hatch'
+description = "Fancy PyPI READMEs with Hatch"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 license = "MIT"
 keywords = []
-authors = [
-  { name = "Hynek Schlawack", email = "hs@ox.cx" },
-]
+authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 classifiers = [
   "Development Status :: 4 - Beta",
+  "Framework :: Hatch",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["hatchling"]
+dependencies = ["hatchling", "tomli; python_version<'3.11'"]
 
 [project.entry-points.hatch]
-fancy_readme = "hatch_fancy_readme.hooks"
+fancy-pypi-readme = "hatch_fancy_pypi_readme.hooks"
+
+
+[project.scripts]
+hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
+
 
 [project.optional-dependencies]
 tests = [
-    "pytest",
-    "coverage",
+  "pytest",
+  "pytest-icdiff",
+  "coverage[toml]",
+  "build",
+  "wheel",
+  # we need a pip>=21.3 for a `pip cache remove` that doesn't fail if we're
+  # not in the cache (yet).
+  "pip>=21.3",
 ]
-dev = [
-    "hatch-fancy-readme[tests]",
-]
+dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
 
 [project.urls]
-Documentation = "https://github.com/hynek/hatch-fancy-readme#readme"
-Issues = "https://github.com/hynek/hatch-fancy-readme/issues"
-Source = "https://github.com/hynek/hatch-fancy-readme"
+Documentation = "https://github.com/hynek/hatch-fancy-pypi-readme#readme"
+Issues = "https://github.com/hynek/hatch-fancy-pypi-readme/issues"
+Source = "https://github.com/hynek/hatch-fancy-pypi-readme"
+Funding = "https://github.com/sponsors/hynek"
+Ko-fi = "https://ko-fi.com/the_hynek"
+
+
+[tool.pytest.ini_options]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+xfail_strict = true
+testpaths = "tests"
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+filterwarnings = ["once::Warning"]
+
+[tool.coverage.run]
+parallel = true
+branch = true
+source = ["hatch_fancy_pypi_readme"]
+
+[tool.coverage.paths]
+source = ["src", ".tox/*/site-packages"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+omit = ["src/hatch_fancy_pypi_readme/hooks.py"]
+exclude_lines = [
+  # a more strict default pragma
+  "\\# pragma: no cover\\b",
+
+  # allow defensive code
+  "^\\s*raise AssertionError\\b",
+  "^\\s*raise NotImplementedError\\b",
+  "^\\s*return NotImplemented\\b",
+  "^\\s*raise$",
+
+  # typing-related code
+  "^if (False|TYPE_CHECKING):",
+  ": \\.\\.\\.(\\s*#.*)?$",
+  "^ +\\.\\.\\.$",
+  "-> ['\"]?NoReturn['\"]?:",
+]
+
+
+[tool.black]
+line-length = 79
+
+
+[tool.isort]
+profile = "attrs"
+
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+follow_imports = "normal"
+implicit_reexport = false
+no_implicit_optional = true
+strict_equality = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
