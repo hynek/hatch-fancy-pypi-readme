@@ -26,4 +26,16 @@ start-after = "Authors\n"
 end-before = "A full"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "\n---\n\n**Bold Footer**"
+text = """
+---
+
+Now let's add an extract from [`tests/example_changelog.md`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/tests/example_changelog.md):
+
+"""
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+file = "tests/example_changelog.md"
+regexp = "<!-- changelog follows -->\n\n\n(.*)\n\n## "
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "\n---\n\nPretty **cool**, huh?"

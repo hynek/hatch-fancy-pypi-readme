@@ -8,7 +8,7 @@
 
 *hatch-fancy-pypi-readme* is a [*Hatch*](https://hatch.pypa.io/) metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
 It allows you to define your PyPI project description[^names] in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
-**parts of files** defined using **cut-off points** or **regular expressions** (*coming soon*).
+**parts of files** defined using **cut-off points** or **regular expressions**.
 
 [^names]: PyPI project description, PyPI landing page, PyPI readme all refer to the same thing.
     In *setuptools* it's called `long_description` and is the text shown on a project’s PyPI page.
@@ -84,8 +84,14 @@ Additionally it’s possible to cut away parts of the file before appending it:
 
 - **`start-after`** cuts away everything before the string specified.
 - **`end-before`** cuts away everything after.
-- **`regexp`** **TODO**
-- **`fallback`** **TODO**
+- **`regexp`** takes a regular expression and returns the first group from it.
+  Internally, it uses
+
+  ```python
+  re.search(regexp, whatever_is_left_after_slicing, re.DOTALL).group(1)
+  ```
+
+  to find it.
 
 Both *Markdown* and *reST* have comments (`<!-- this is a Markdown comment -->` and `.. this is a reST comment`) that you can use for invisible markers:
 
@@ -108,17 +114,24 @@ together with:
 file = "path.md"
 start-after = "<!-- cut after this -->\n\n"
 end-before = "\n\n<!-- but before this -->"
+regexp = "the (.*) body"
 ```
 
 would append:
 
 ```markdown
-This is the *interesting* body!
+*interesting*
 ```
 
-to you readme.
+to your readme.
 
 Note that you you can insert the same file **multiple times** – each time a different part!
+Also note that the order of the options doesn't matter.
+They're always executed in the same order:
+
+1. `start-after`
+2. `end-before`
+3. `regexp`
 
 ---
 
@@ -148,7 +161,7 @@ You can pipe the output into tools like [*rich-cli*](https://github.com/Textuali
 For example, if you run
 
 ```shell
-$ pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown -
+$ pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown --hyperlinks -
 ```
 
 with our [example configuration][example-config], you will get the following output:

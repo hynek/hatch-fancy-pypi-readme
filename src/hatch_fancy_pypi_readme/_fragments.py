@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import re
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, Iterable, Protocol
@@ -101,6 +103,7 @@ class FileFragment:
         path = Path(cfg.pop("file"))
         start_after = cfg.pop("start-after", None)
         end_before = cfg.pop("end-before", None)
+        regexp = cfg.pop("regexp", None)
 
         errs: list[str] = []
         if cfg:
@@ -125,6 +128,24 @@ class FileFragment:
                 errs.append(
                     f"file fragment: 'end_before' {end_before!r} not found."
                 )
+
+        if regexp:
+            try:
+                m = re.search(regexp, contents, re.DOTALL)
+                if not m:
+                    errs.append(
+                        f"file fragment: pattern {regexp!r} not found."
+                    )
+                else:
+                    try:
+                        contents = m.group(1)
+                    except IndexError:
+                        errs.append(
+                            "file fragment: pattern matches, but no group "
+                            "defined."
+                        )
+            except re.error as e:
+                errs.append(f"file fragment: invalid pattern {regexp!r}: {e}")
 
         if errs:
             raise ConfigurationError(errs)
