@@ -11,7 +11,7 @@ It allows you to define your PyPI project description[^names] in terms of concat
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
 [^names]: PyPI project description, PyPI landing page, PyPI readme all refer to the same thing.
-    In *setuptools* it's called `long_description` and is the text shown on a project’s PyPI page.
+    In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
 
     We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
@@ -143,15 +143,15 @@ would append:
 
 to your readme.
 
-Note that you you can insert the same file **multiple times** – each time a different part!
-Also note that the order of the options doesn't matter.
-They're always executed in the same order:
-
-1. `start-after`
-2. `end-before`
-3. `regexp`
-
----
+> **Note**
+>
+> - You can insert the same file **multiple times** – each time a different part!
+> - The order of the options in a fragment block does *not* matter.
+>   They’re always executed in the same order:
+>
+>   1. `start-after`
+>   2. `end-before`
+>   3. `regexp`
 
 For a complete example, please see our [example configuration][example-config].
 
@@ -186,9 +186,10 @@ with our [example configuration][example-config], you will get the following out
 
 ![rich-cli output](https://raw.githubusercontent.com/hynek/hatch-fancy-pypi-readme/main/rich-cli-out.svg)
 
----
-
-While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer.
+> **Warning**
+> While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
+>
+> It will **not** help you debug **packaging issues**, though.
 
 
 ## Project Links
