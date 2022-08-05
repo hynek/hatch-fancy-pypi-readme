@@ -36,6 +36,7 @@ The goal of this plugin is to be able to switch away from `setup.py` without com
 With [*Hatch*] we got a standards-based packaging library that offers exactly the plugin interface I needed.
 Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
 
+<!-- start docs -->
 
 ## Configuration
 
@@ -199,6 +200,7 @@ with our [example configuration][example-config], you will get the following out
 >
 > It will **not** help you debug **packaging issues**, though.
 
+<!-- end docs -->
 
 ## Project Links
 

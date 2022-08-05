@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 
@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 name = "hatch-fancy-pypi-readme"
 version = "22.2.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
-readme = "README.md"
+dynamic = ["readme"]
 requires-python = ">=3.8"
 license = "MIT"
 keywords = []
@@ -34,13 +34,7 @@ hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
 
 
 [project.optional-dependencies]
-tests = [
-  "pytest",
-  "pytest-icdiff",
-  "coverage[toml]",
-  "build",
-  "wheel",
-]
+tests = ["pytest", "pytest-icdiff", "coverage[toml]", "build", "wheel"]
 dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
 
@@ -50,6 +44,28 @@ Issues = "https://github.com/hynek/hatch-fancy-pypi-readme/issues"
 Source = "https://github.com/hynek/hatch-fancy-pypi-readme"
 Funding = "https://github.com/sponsors/hynek"
 Ko-fi = "https://ko-fi.com/the_hynek"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+end-before = "<!-- start docs -->"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+start-after = "<!-- end docs -->"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "## Release Information\n"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "CHANGELOG.md"
+pattern = "<!-- changelog follows -->\n(.+)?\n\n## "
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = """---
+Of course, *this* PyPI readme has been created by *hatch-fancy-pypi-readme*. Isn’t it ✨fancy✨?"""
 
 
 [tool.pytest.ini_options]

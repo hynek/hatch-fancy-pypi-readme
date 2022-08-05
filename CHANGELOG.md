@@ -12,6 +12,10 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.1.0...HEAD)
 
+### Changed
+
+- We can finally use *hatch-fancy-pypi-readme* for our own ✨fancy✨ PyPI readme!
+
 
 ## [22.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/tree/22.1.0) - 2022-08-05
 
