@@ -18,7 +18,10 @@ def _project_directory_uri(tmp_path):
 
 @pytest.fixture(name="new_project")
 def new_project(project_directory_uri, tmp_path, monkeypatch):
-    shutil.copytree(Path.cwd(), tmp_path / "plugin")
+    shutil.copytree(Path.cwd() / "src", tmp_path / "plugin" / "src")
+    for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
+        shutil.copy(Path.cwd() / fn, tmp_path / "plugin" / fn)
+
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
