@@ -7,16 +7,17 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
 
 *hatch-fancy-pypi-readme* is a [*Hatch*] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
-It allows you to define your PyPI project description[^names] in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
+It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
-[^names]: PyPI project description, PyPI landing page, PyPI readme all refer to the same thing.
-    In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
-
-    We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
 You want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
+
+> **Note**
+> PyPI project description, PyPI landing page, and PyPI readme all refer to the same thing.
+> In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
+> We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
 
 ## Motivation
