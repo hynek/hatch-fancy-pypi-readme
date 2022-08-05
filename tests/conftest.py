@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import os
-import subprocess
+import shutil
 import sys
 
 from pathlib import Path
@@ -11,37 +11,15 @@ from pathlib import Path
 import pytest
 
 
-@pytest.fixture(autouse=True, scope="session")
-def _clean_pip_cache():
-    """
-    pip cache needs to be cleaned of ourselves before each test run.
-
-    Otherwise a cached version is used which is highly confusing.
-
-    NB: Needs at least pip 21.3 which is the first one to not fail if there's
-    no hatch_fancy_pypi_readme in the cache.
-    """
-    subprocess.run(
-        (
-            sys.executable,
-            "-m",
-            "pip",
-            "cache",
-            "remove",
-            "hatch_fancy_pypi_readme",
-        ),
-        check=True,
-    )
-
-
-@pytest.fixture(name="project_directory_uri", scope="session")
-def _project_directory_uri():
+@pytest.fixture(name="project_directory_uri")
+def _project_directory_uri(tmp_path):
     leading_slashes = "//" if os.sep == "/" else "///"
-    return f"file:{leading_slashes}{Path.cwd().as_posix()}"
+    return f"file:{leading_slashes}{tmp_path.as_posix()}/plugin"
 
 
 @pytest.fixture(name="new_project")
 def new_project(project_directory_uri, tmp_path, monkeypatch):
+    shutil.copytree(Path.cwd(), tmp_path / 'plugin')
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
