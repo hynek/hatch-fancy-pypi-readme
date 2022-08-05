@@ -50,21 +50,22 @@ content-type = "text/markdown"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
-end-before = "<!-- start docs -->"
+end-before = "\n<!-- start docs -->"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
 start-after = "<!-- end docs -->"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "## Release Information\n"
+text = "\n\n# Release Information\n"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "CHANGELOG.md"
-pattern = "<!-- changelog follows -->\n(.+)?\n\n## "
+pattern = "<!-- changelog follows -->\n(.+)?\n## "
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 text = """---
+
 Of course, *this* PyPI readme has been created by *hatch-fancy-pypi-readme*. Isn’t it ✨fancy✨?"""
 
 
