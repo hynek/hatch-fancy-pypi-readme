@@ -102,11 +102,11 @@ Additionally it’s possible to cut away parts of the file before appending it:
 
 - **`start-after`** cuts away everything before the string specified.
 - **`end-before`** cuts away everything after.
-- **`regexp`** takes a regular expression and returns the first group from it.
+- **`pattern`** takes a [*regular expression*](https://docs.python.org/3/library/re.html) and returns the first group from it (you probably want to make your capture group non-greedy by appending a question mark: `(.*)?`).
   Internally, it uses
 
   ```python
-  re.search(regexp, whatever_is_left_after_slicing, re.DOTALL).group(1)
+  re.search(pattern, whatever_is_left_after_slicing, re.DOTALL).group(1)
   ```
 
   to find it.
@@ -132,7 +132,7 @@ together with:
 path = "path.md"
 start-after = "<!-- cut after this -->\n\n"
 end-before = "\n\n<!-- but before this -->"
-regexp = "the (.*) body"
+pattern = "the (.*) body"
 ```
 
 would append:
@@ -151,7 +151,7 @@ to your readme.
 >
 >   1. `start-after`
 >   2. `end-before`
->   3. `regexp`
+>   3. `pattern`
 
 For a complete example, please see our [example configuration][example-config].
 

@@ -103,7 +103,7 @@ class FileFragment:
         path = Path(cfg.pop("path"))
         start_after = cfg.pop("start-after", None)
         end_before = cfg.pop("end-before", None)
-        regexp = cfg.pop("regexp", None)
+        pattern = cfg.pop("pattern", None)
 
         errs: list[str] = []
         if cfg:
@@ -129,12 +129,12 @@ class FileFragment:
                     f"file fragment: 'end_before' {end_before!r} not found."
                 )
 
-        if regexp:
+        if pattern:
             try:
-                m = re.search(regexp, contents, re.DOTALL)
+                m = re.search(pattern, contents, re.DOTALL)
                 if not m:
                     errs.append(
-                        f"file fragment: pattern {regexp!r} not found."
+                        f"file fragment: pattern {pattern!r} not found."
                     )
                 else:
                     try:
@@ -145,7 +145,7 @@ class FileFragment:
                             "defined."
                         )
             except re.error as e:
-                errs.append(f"file fragment: invalid pattern {regexp!r}: {e}")
+                errs.append(f"file fragment: invalid pattern {pattern!r}: {e}")
 
         if errs:
             raise ConfigurationError(errs)

@@ -142,15 +142,15 @@ This is the *interesting* body!"""
             "file fragment: 'end_before' 'also nope' not found.",
         ] == ei.value.errors
 
-    def test_invalid_regexp(self, txt_path):
+    def test_invalid_pattern(self, txt_path):
         """
         re-compilation errors are caught and reported.
         """
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "regexp": r"**",
                     "path": str(txt_path),
+                    "pattern": r"**",
                 }
             )
         assert [
@@ -158,29 +158,29 @@ This is the *interesting* body!"""
             "position 0"
         ] == ei.value.errors
 
-    def test_regexp_no_match(self, txt_path):
+    def test_pattern_no_match(self, txt_path):
         """
-        If the regexp doesn't match, a helpful error is raises.
+        If the pattern doesn't match, a helpful error is raises.
         """
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "regexp": r"wtf",
                     "path": str(txt_path),
+                    "pattern": r"wtf",
                 }
             )
 
         assert ["file fragment: pattern 'wtf' not found."] == ei.value.errors
 
-    def test_regexp_no_group(self, txt_path):
+    def test_pattern_no_group(self, txt_path):
         """
-        If the regexp matches but lacks a group, tell the user.
+        If the pattern matches but lacks a group, tell the user.
         """
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "regexp": r"Uninteresting",
                     "path": str(txt_path),
+                    "pattern": r"Uninteresting",
                 }
             )
 
@@ -188,16 +188,16 @@ This is the *interesting* body!"""
             "file fragment: pattern matches, but no group defined."
         ] == ei.value.errors
 
-    def test_regexp_ok(self, txt_path):
+    def test_pattern_ok(self, txt_path):
         """
-        If the regexp matches and has a group, return it.
+        If the pattern matches and has a group, return it.
         """
         assert (
             "*interesting*"
             == FileFragment.from_config(
                 {
-                    "regexp": r"the (.*) body",
                     "path": str(txt_path),
+                    "pattern": r"the (.*) body",
                 }
             ).render()
         )
