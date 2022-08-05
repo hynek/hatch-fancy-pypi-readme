@@ -6,7 +6,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
 
-*hatch-fancy-pypi-readme* is a [*Hatch*](https://hatch.pypa.io/) metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
+*hatch-fancy-pypi-readme* is a [*Hatch*] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
 It allows you to define your PyPI project description[^names] in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
@@ -19,9 +19,27 @@ You want your PyPI readme to be the project readme, but without badges, followed
 You’ve come to the right place!
 
 
+## Motivation
+
+In the olden days of `setup.py` files, I’ve taken advantage of the fact that I can write Python to have compelling PyPI readmes.
+
+For example [this](https://github.com/python-attrs/attrs/blob/b3dfebe2e10b44437c4f97d788fb5220d790efd0/setup.py#L110-L124) is the code that gave me the PyPI readme for [*attrs* 22.1.0](https://pypi.org/project/attrs/22.1.0/).
+Especially having a summary of the latest changes is something I’ve found users to appreciate.
+
+The move away from dynamic `setup.py` files to static `pyproject.toml` configurations is great, but it robbed me of being able to provide this service to my users.
+I've been able to add some dynamism using the wonderful [*Cog*](https://nedbatchelder.com/code/cog/), but it’s a bit awkward and shouldn’t be the long-term solution.
+
+The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience and without needing third-party tools for configuration-file templating.
+
+---
+
+With [*Hatch*] we got a standards-based packaging library that offers exactly the plugin interface I needed.
+Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
+
+
 ## Configuration
 
-*hatch-fancy-pypi-readme* is, like *Hatch*, configured in your project’s `pyproject.toml`.
+*hatch-fancy-pypi-readme* is, like [*Hatch*], configured in your project’s `pyproject.toml`.
 
 First you have to add *hatch-fancy-pypi-readme* to your `[build-system]`:
 
@@ -34,7 +52,7 @@ build-backend = "hatchling.build"
 Next you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
 
 Here, you **must** supply a `content-type`.
-Usually it’s going to be `text/markdown` or `text/x-rst`.
+Currently, only `text/markdown` and `text/x-rst` are supported.
 
 ```toml
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
@@ -170,7 +188,7 @@ with our [example configuration][example-config], you will get the following out
 
 ---
 
-While the execution model is somewhat different from the *Hatch*-Python packaging pipeline, it uses the same configuration validator and text renderer.
+While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer.
 
 
 ## Project Links
@@ -184,3 +202,4 @@ While the execution model is somewhat different from the *Hatch*-Python packagin
   Please note that this is the requirement for **building** packages and *not* for the packages themselves!
 
 [example-config]: https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/tests/example_pyproject.toml
+[*Hatch*]: https://hatch.pypa.io/
