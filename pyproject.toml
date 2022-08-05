@@ -40,9 +40,6 @@ tests = [
   "coverage[toml]",
   "build",
   "wheel",
-  # we need a pip>=21.3 for a `pip cache remove` that doesn't fail if we're
-  # not in the cache (yet).
-  "pip>=21.3",
 ]
 dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
