@@ -111,4 +111,5 @@ jobs:
         with:
           python-version: ${{env.PYTHON_LATEST}}
       - run: python -m pip install -e .[dev]
-      - run: python -c 'import attr; print(attr.__version__)'
+      - run: python -m hatch_fancy_pypi_readme
+      - run: hatch-fancy-pypi-readme
