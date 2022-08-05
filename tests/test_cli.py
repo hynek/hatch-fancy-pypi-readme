@@ -24,10 +24,12 @@ def _pyproject():
 @pytest.fixture(name="empty_pyproject")
 def _empty_pyproject():
     return {
-        "tool": {"hatch": {"metadata": {"hooks": {"fancy-pypi-readme": {}}}}}
+        "project": {"dynamic": ["foo", "readme", "bar"]},
+        "tool": {"hatch": {"metadata": {"hooks": {"fancy-pypi-readme": {}}}}},
     }
 
 
+@pytest.mark.slow
 class TestCLIEndToEnd:
     @pytest.mark.usefixtures("new_project")
     def test_missing_config(self):
@@ -68,13 +70,26 @@ class TestCLIEndToEnd:
 
 
 class TestCLI:
-    @pytest.mark.usefixtures("new_project")
+    def test_cli_run_missing_dynamic(self, capfd):
+        """
+        Missing readme in dynamic is caught and gives helpful advice.
+        """
+        with pytest.raises(SystemExit):
+            cli_run({}, sys.stdout)
+
+        out, err = capfd.readouterr()
+
+        assert "You must add 'readme' to 'project.dynamic'.\n" == err
+        assert "" == out
+
     def test_cli_run_missing_config(self, capfd):
         """
         Missing configuration is caught and gives helpful advice.
         """
         with pytest.raises(SystemExit):
-            cli_run({}, sys.stdout)
+            cli_run(
+                {"project": {"dynamic": ["foo", "readme", "bar"]}}, sys.stdout
+            )
 
         out, err = capfd.readouterr()
 

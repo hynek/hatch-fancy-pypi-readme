@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import sys
 
-from typing import Any, TextIO
+from typing import Any, NoReturn, TextIO
 
 from hatch_fancy_pypi_readme.exceptions import ConfigurationError
 
@@ -15,26 +15,39 @@ from ._config import load_and_validate_config
 
 
 def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
+    """
+    Best-effort verify config and print resulting PyPI readme.
+    """
+    is_dynamic = False
+    try:
+        is_dynamic = "readme" in pyproject["project"]["dynamic"]
+    except KeyError:
+        pass
+
+    if not is_dynamic:
+        _fail("You must add 'readme' to 'project.dynamic'.")
+
     try:
         cfg = pyproject["tool"]["hatch"]["metadata"]["hooks"][
             "fancy-pypi-readme"
         ]
     except KeyError:
-        print(
+        _fail(
             "Missing configuration "
             "(`[tool.hatch.metadata.hooks.fancy-pypi-readme]`)",
-            file=sys.stderr,
         )
-        sys.exit(1)
 
     try:
         config = load_and_validate_config(cfg)
     except ConfigurationError as e:
-        print(
+        _fail(
             "Configuration has errors:\n\n"
             + "\n".join(f"- {msg}" for msg in e.errors),
-            file=sys.stderr,
         )
-        sys.exit(1)
 
     print(build_text(config.fragments), file=out)
+
+
+def _fail(msg: str) -> NoReturn:
+    print(msg, file=sys.stderr)
+    sys.exit(1)

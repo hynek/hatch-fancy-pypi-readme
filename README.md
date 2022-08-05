@@ -49,7 +49,15 @@ requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 ```
 
-Next you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
+Next, you must tell the build system that your readme is dynamic by adding it to the `project.dynamic` list:
+
+```toml
+[project]
+# ...
+dynamic = ["readme"]
+```
+
+Next, you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
 
 Here, you **must** supply a `content-type`.
 Currently, only `text/markdown` and `text/x-rst` are supported.

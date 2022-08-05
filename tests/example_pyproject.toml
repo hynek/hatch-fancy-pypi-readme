@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 [project]
 name = "my-pkg"
 version = "1.0"
+dynamic = ["readme"]
 
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
