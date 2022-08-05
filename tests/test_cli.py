@@ -116,3 +116,14 @@ class TestCLI:
             "setting.\n" == err
         )
         assert "" == out
+
+    def test_cli_run_ok(self, capfd, pyproject):
+        """
+        Correct configuration gives correct output.
+        """
+        cli_run(pyproject, sys.stdout)
+
+        out, err = capfd.readouterr()
+
+        assert "" == err
+        assert out.startswith("# Level 1 Header")
