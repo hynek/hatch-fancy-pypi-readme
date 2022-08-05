@@ -4,6 +4,7 @@
 
 import sys
 
+from io import StringIO
 from pathlib import Path
 
 import pytest
@@ -29,7 +30,6 @@ def _empty_pyproject():
     }
 
 
-@pytest.mark.slow
 class TestCLIEndToEnd:
     @pytest.mark.usefixtures("new_project")
     def test_missing_config(self):
@@ -119,11 +119,14 @@ class TestCLI:
 
     def test_cli_run_ok(self, capfd, pyproject):
         """
-        Correct configuration gives correct output.
+        Correct configuration gives correct output to the file selected.
         """
-        cli_run(pyproject, sys.stdout)
+        sio = StringIO()
+
+        cli_run(pyproject, sio)
 
         out, err = capfd.readouterr()
 
         assert "" == err
-        assert out.startswith("# Level 1 Header")
+        assert "" == out
+        assert sio.getvalue().startswith("# Level 1 Header")

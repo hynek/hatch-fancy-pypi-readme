@@ -45,7 +45,9 @@ def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
             + "\n".join(f"- {msg}" for msg in e.errors),
         )
 
-    print(build_text(config.fragments), file=out)
+    # This no cover pragma is utter nonsense, because this line gets executed
+    # _many_ times.
+    print(build_text(config.fragments), file=out)  # pragma: no cover
 
 
 def _fail(msg: str) -> NoReturn:
