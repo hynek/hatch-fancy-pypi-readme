@@ -27,7 +27,7 @@ For example [this](https://github.com/python-attrs/attrs/blob/b3dfebe2e10b44437c
 Especially having a summary of the latest changes is something I’ve found users to appreciate.
 
 The move away from dynamic `setup.py` files to static `pyproject.toml` configurations is great, but it robbed me of being able to provide this service to my users.
-I've been able to add some dynamism using the wonderful [*Cog*](https://nedbatchelder.com/code/cog/), but it’s a bit awkward and shouldn’t be the long-term solution.
+I’ve been able to add some dynamism using the wonderful [*Cog*](https://nedbatchelder.com/code/cog/), but it’s a bit awkward and shouldn’t be the long-term solution.
 
 The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience and without needing third-party tools for configuration-file templating.
 
@@ -74,7 +74,7 @@ content-type = "text/markdown"
 Finally, you also **must** supply an *array* of `fragments`.
 A fragment is a piece of text that is appended to your readme in the order that it’s specified.
 
-We recommend *TOML*'s [syntactic sugar for arrays of wrapping the array name in double brackets](https://toml.io/en/v1.0.0#array-of-tables) and will use it throughout this documentation.
+We recommend *TOML*’s [syntactic sugar for arrays of wrapping the array name in double brackets](https://toml.io/en/v1.0.0#array-of-tables) and will use it throughout this documentation.
 
 
 #### Text
