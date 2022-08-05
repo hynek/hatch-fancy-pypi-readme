@@ -19,7 +19,7 @@ def _project_directory_uri(tmp_path):
 
 @pytest.fixture(name="new_project")
 def new_project(project_directory_uri, tmp_path, monkeypatch):
-    shutil.copytree(Path.cwd(), tmp_dir / 'plugin')
+    shutil.copytree(Path.cwd(), tmp_path / 'plugin')
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
