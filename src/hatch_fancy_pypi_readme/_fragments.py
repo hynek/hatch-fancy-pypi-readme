@@ -94,13 +94,13 @@ class FileFragment:
     A static text fragment.
     """
 
-    key: ClassVar[str] = "file"
+    key: ClassVar[str] = "path"
 
     _contents: str
 
     @classmethod
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        path = Path(cfg.pop("file"))
+        path = Path(cfg.pop("path"))
         start_after = cfg.pop("start-after", None)
         end_before = cfg.pop("end-before", None)
         regexp = cfg.pop("regexp", None)

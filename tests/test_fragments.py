@@ -51,7 +51,7 @@ class TestFileFragment:
         Loading a file works.
         """
         assert (
-            txt == FileFragment.from_config({"file": str(txt_path)}).render()
+            txt == FileFragment.from_config({"path": str(txt_path)}).render()
         )
 
     def test_start_after_ok(self, txt_path):
@@ -68,7 +68,7 @@ Uninteresting Footer
 """
             == FileFragment.from_config(
                 {
-                    "file": str(txt_path),
+                    "path": str(txt_path),
                     "start-after": "<!-- cut after this -->\n\n",
                 }
             ).render()
@@ -87,7 +87,7 @@ Uninteresting Footer
 This is the *interesting* body!"""
             == FileFragment.from_config(
                 {
-                    "file": str(txt_path),
+                    "path": str(txt_path),
                     "end-before": "\n\n<!-- but before this -->",
                 }
             ).render()
@@ -102,7 +102,7 @@ This is the *interesting* body!"""
             "This is the *interesting* body!"
             == FileFragment.from_config(
                 {
-                    "file": str(txt_path),
+                    "path": str(txt_path),
                     "start-after": "<!-- cut after this -->\n\n",
                     "end-before": "\n\n<!-- but before this -->",
                 }
@@ -115,7 +115,7 @@ This is the *interesting* body!"""
         """
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
-                {"file": str(txt_path), "foo": "bar", "baz": "qux"}
+                {"path": str(txt_path), "foo": "bar", "baz": "qux"}
             )
 
         assert [
@@ -131,7 +131,7 @@ This is the *interesting* body!"""
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "file": str(txt_path),
+                    "path": str(txt_path),
                     "start-after": "nope",
                     "end-before": "also nope",
                 }
@@ -149,8 +149,8 @@ This is the *interesting* body!"""
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "file": str(txt_path),
                     "regexp": r"**",
+                    "path": str(txt_path),
                 }
             )
         assert [
@@ -165,8 +165,8 @@ This is the *interesting* body!"""
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "file": str(txt_path),
                     "regexp": r"wtf",
+                    "path": str(txt_path),
                 }
             )
 
@@ -179,8 +179,8 @@ This is the *interesting* body!"""
         with pytest.raises(ConfigurationError) as ei:
             FileFragment.from_config(
                 {
-                    "file": str(txt_path),
                     "regexp": r"Uninteresting",
+                    "path": str(txt_path),
                 }
             )
 
@@ -196,8 +196,8 @@ This is the *interesting* body!"""
             "*interesting*"
             == FileFragment.from_config(
                 {
-                    "file": str(txt_path),
                     "regexp": r"the (.*) body",
+                    "path": str(txt_path),
                 }
             ).render()
         )

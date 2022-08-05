@@ -91,11 +91,11 @@ Note that there’s no additional space or empty lines between fragments unless 
 
 #### File
 
-A file fragment reads a file specified by the `file` key and appends it:
+A file fragment reads a file specified by the `path` key and appends it:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-file = "AUTHORS.md"
+path = "AUTHORS.md"
 ```
 
 Additionally it’s possible to cut away parts of the file before appending it:
@@ -129,7 +129,7 @@ together with:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-file = "path.md"
+path = "path.md"
 start-after = "<!-- cut after this -->\n\n"
 end-before = "\n\n<!-- but before this -->"
 regexp = "the (.*) body"

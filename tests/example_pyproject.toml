@@ -21,7 +21,7 @@ Let's import `AUTHORS.md` without its header and last paragraph next:
 '''
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-file = "AUTHORS.md"
+path = "AUTHORS.md"
 start-after = "Authors\n"
 end-before = "A full"
 
@@ -34,7 +34,7 @@ Now let's add an extract from [`tests/example_changelog.md`](https://github.com/
 """
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-file = "tests/example_changelog.md"
+path = "tests/example_changelog.md"
 regexp = "<!-- changelog follows -->\n\n\n(.*)\n\n## "
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
