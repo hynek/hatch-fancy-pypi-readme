@@ -111,7 +111,7 @@ class FileFragment:
                 f"file fragment: unknown option: {o!r}" for o in cfg.keys()
             )
 
-        contents = path.read_text()
+        contents = path.read_text(encoding="utf-8")
 
         if start_after is not None:
             try:

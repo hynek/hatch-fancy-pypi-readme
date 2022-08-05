@@ -17,6 +17,11 @@ The **third number** is for emergencies when we need to start branches for older
 - We can finally use *hatch-fancy-pypi-readme* for our own ✨fancy✨ PyPI readme!
 
 
+### Fixed
+
+- Hopefully fixed readmes with emojis on Windows.
+
+
 ## [22.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/tree/22.1.0) - 2022-08-05
 
 ### Added
