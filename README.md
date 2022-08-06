@@ -1,6 +1,4 @@
-# *hatch-fancy-pypi-readme*
-
-*Because your ✨fancy project✨ deserves a ✨fancy PyPI landing page✨.*
+# Your ✨Fancy Project✨ Deserves a ✨Fancy PyPI Landing Page✨!
 
 [![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
