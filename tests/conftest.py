@@ -2,7 +2,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-import os
 import shutil
 
 from pathlib import Path
@@ -12,10 +11,10 @@ import pytest
 
 @pytest.fixture(name="new_project")
 def new_project(tmp_path, monkeypatch):
-    plugin_directory = tmp_path / "plugin"
-    shutil.copytree(Path.cwd() / "src", plugin_directory / "src")
+    plugin_dir = tmp_path / "plugin"
+    shutil.copytree(Path.cwd() / "src", plugin_dir / "src")
     for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
-        shutil.copy(Path.cwd() / fn, plugin_directory / fn)
+        shutil.copy(Path.cwd() / fn, plugin_dir / fn)
 
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
@@ -24,7 +23,7 @@ def new_project(tmp_path, monkeypatch):
     project_file.write_text(
         f"""\
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme @ {plugin_directory.as_uri()}"]
+requires = ["hatchling", "hatch-fancy-pypi-readme @ {plugin_dir.as_uri()}"]
 build-backend = "hatchling.build"
 
 [project]
