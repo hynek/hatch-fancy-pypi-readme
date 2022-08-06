@@ -47,7 +47,7 @@ hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
 
 
 [project.optional-dependencies]
-tests = ["pytest", "pytest-icdiff", "coverage[toml]", "build", "wheel"]
+tests = ["pytest", "build", "wheel"]
 dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
 
