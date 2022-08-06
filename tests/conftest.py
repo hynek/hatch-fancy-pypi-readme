@@ -10,8 +10,8 @@ from tempfile import TemporaryDirectory
 import pytest
 
 
-@pytest.fixture(scope="session")
-def plugin_dir():
+@pytest.fixture(name="plugin_dir", scope="session")
+def _plugin_dir():
     with TemporaryDirectory() as d:
         directory = Path(d, "plugin")
         shutil.copytree(Path.cwd() / "src", directory / "src")
@@ -22,7 +22,7 @@ def plugin_dir():
 
 
 @pytest.fixture(name="new_project")
-def new_project(plugin_dir, tmp_path, monkeypatch):
+def _new_project(plugin_dir, tmp_path, monkeypatch):
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
