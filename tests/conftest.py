@@ -10,17 +10,12 @@ from pathlib import Path
 import pytest
 
 
-@pytest.fixture(name="project_directory_uri")
-def _project_directory_uri(tmp_path):
-    leading_slashes = "//" if os.sep == "/" else "///"
-    return f"file:{leading_slashes}{tmp_path.as_posix()}/plugin"
-
-
 @pytest.fixture(name="new_project")
-def new_project(project_directory_uri, tmp_path, monkeypatch):
-    shutil.copytree(Path.cwd() / "src", tmp_path / "plugin" / "src")
+def new_project(tmp_path, monkeypatch):
+    plugin_directory = tmp_path / "plugin"
+    shutil.copytree(Path.cwd() / "src", plugin_directory / "src")
     for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
-        shutil.copy(Path.cwd() / fn, tmp_path / "plugin" / fn)
+        shutil.copy(Path.cwd() / fn, plugin_directory / fn)
 
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
@@ -29,7 +24,7 @@ def new_project(project_directory_uri, tmp_path, monkeypatch):
     project_file.write_text(
         f"""\
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme @ {project_directory_uri}"]
+requires = ["hatchling", "hatch-fancy-pypi-readme @ {plugin_directory.as_uri()}"]
 build-backend = "hatchling.build"
 
 [project]
