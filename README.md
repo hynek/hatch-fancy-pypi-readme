@@ -32,8 +32,6 @@ I’ve been able to add some dynamism using the wonderful [*Cog*](https://nedbat
 
 The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience and without needing third-party tools for configuration-file templating.
 
----
-
 With [*Hatch*] we got a standards-based packaging library that offers exactly the plugin interface I needed.
 Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
 
