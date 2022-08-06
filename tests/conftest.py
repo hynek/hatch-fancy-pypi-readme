@@ -3,19 +3,25 @@
 # SPDX-License-Identifier: MIT
 
 import shutil
-
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytest
 
 
-@pytest.fixture(name="new_project")
-def new_project(tmp_path, monkeypatch):
-    plugin_dir = tmp_path / "plugin"
-    shutil.copytree(Path.cwd() / "src", plugin_dir / "src")
-    for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
-        shutil.copy(Path.cwd() / fn, plugin_dir / fn)
+@pytest.fixture(scope='session')
+def plugin_dir():
+    with TemporaryDirectory() as d:
+        directory = Path(d, 'plugin')
+        shutil.copytree(Path.cwd() / "src", directory / "src")
+        for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
+            shutil.copy(Path.cwd() / fn, directory / fn)
 
+        yield directory.resolve()
+
+
+@pytest.fixture(name="new_project")
+def new_project(plugin_dir, tmp_path, monkeypatch):
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
