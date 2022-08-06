@@ -210,8 +210,7 @@ with our [example configuration][example-config], you will get the following out
 - **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
 - **Documentation**:  https://github.com/hynek/hatch-fancy-pypi-readme#readme
 - **Changelog**: https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELOG.md
-- **Supported Python Versions**: 3.8 and later.
-  Please note that this is the requirement for **building** packages and *not* for the packages themselves!
+- **Supported Python Versions**: 3.7 and later.
 
 [example-config]: https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/tests/example_pyproject.toml
 [*Hatch*]: https://hatch.pypa.io/

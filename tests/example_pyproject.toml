@@ -39,4 +39,4 @@ path = "tests/example_changelog.md"
 pattern = "<!-- changelog follows -->\n\n\n(.*)?\n\n## "
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "\n---\n\nPretty **cool**, huh?"
+text = "\n---\n\nPretty **cool**, huh? ✨"
