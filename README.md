@@ -8,7 +8,6 @@
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
-
 You want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
 
@@ -16,6 +15,14 @@ You’ve come to the right place!
 > PyPI project description, PyPI landing page, and PyPI readme all refer to the same thing.
 > In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
+
+
+### Showcases
+
+- [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
+- And finally of course [*hatch-fancy-pypi-readme* 22.2.0](https://pypi.org/project/hatch-fancy-pypi-readme/22.2.0/), before we had to stop dog-fooding ourselves to get a version out ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/61bfac7bc30040286c6fda0838ac918d94aabf6e/pyproject.toml#L48-L69)).
+
+Feel free to [open a PR](https://github.com/hynek/hatch-fancy-pypi-readme/edit/main/README.md) to add *your* ✨fancy✨ project!
 
 
 ## Motivation
