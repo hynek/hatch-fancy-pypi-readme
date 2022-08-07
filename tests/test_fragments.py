@@ -139,7 +139,7 @@ This is the *interesting* body!"""
 
         assert [
             "file fragment: 'start-after' 'nope' not found.",
-            "file fragment: 'end_before' 'also nope' not found.",
+            "file fragment: 'end-before' 'also nope' not found.",
         ] == ei.value.errors
 
     def test_invalid_pattern(self, txt_path):
