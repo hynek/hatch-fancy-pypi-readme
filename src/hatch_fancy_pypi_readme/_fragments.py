@@ -78,10 +78,12 @@ class TextFragment:
 
     @classmethod
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        contents = cfg.pop("text")
+        contents = cfg.pop(cls.key)
 
         if not contents:
-            raise ConfigurationError(["text fragment: text can't be empty."])
+            raise ConfigurationError(
+                [f"text fragment: {cls.key} can't be empty."]
+            )
 
         if cfg:
             raise ConfigurationError(
@@ -106,7 +108,7 @@ class FileFragment:
 
     @classmethod
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        path = Path(cfg.pop("path"))
+        path = Path(cfg.pop(cls.key))
         start_after = cfg.pop("start-after", None)
         end_before = cfg.pop("end-before", None)
         pattern = cfg.pop("pattern", None)
