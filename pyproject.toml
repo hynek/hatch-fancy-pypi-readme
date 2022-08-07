@@ -8,12 +8,16 @@ name = "hatch-fancy-pypi-readme"
 version = "22.4.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
 requires-python = ">=3.7"
-license = "MIT"
-keywords = []
+keywords = ["hatch", "pypi", "readme", "documentation"]
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
+license = { file = "LICENSE.txt" }
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Hatch",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Build Tools",
+
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
@@ -53,6 +57,7 @@ dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
 [project.urls]
 Documentation = "https://github.com/hynek/hatch-fancy-pypi-readme#readme"
+Changelog = "https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELOG.md"
 "Source Code" = "https://github.com/hynek/hatch-fancy-pypi-readme"
 Funding = "https://github.com/sponsors/hynek"
 Ko-fi = "https://ko-fi.com/the_hynek"
