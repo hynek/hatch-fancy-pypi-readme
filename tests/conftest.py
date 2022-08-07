@@ -2,26 +2,27 @@
 #
 # SPDX-License-Identifier: MIT
 
-import os
 import shutil
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytest
 
 
-@pytest.fixture(name="project_directory_uri")
-def _project_directory_uri(tmp_path):
-    leading_slashes = "//" if os.sep == "/" else "///"
-    return f"file:{leading_slashes}{tmp_path.as_posix()}/plugin"
+@pytest.fixture(name="plugin_dir", scope="session")
+def _plugin_dir():
+    with TemporaryDirectory() as d:
+        directory = Path(d, "plugin")
+        shutil.copytree(Path.cwd() / "src", directory / "src")
+        for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
+            shutil.copy(Path.cwd() / fn, directory / fn)
+
+        yield directory.resolve()
 
 
 @pytest.fixture(name="new_project")
-def new_project(project_directory_uri, tmp_path, monkeypatch):
-    shutil.copytree(Path.cwd() / "src", tmp_path / "plugin" / "src")
-    for fn in ["pyproject.toml", "README.md", "CHANGELOG.md"]:
-        shutil.copy(Path.cwd() / fn, tmp_path / "plugin" / fn)
-
+def _new_project(plugin_dir, tmp_path, monkeypatch):
     project_dir = tmp_path / "my-app"
     project_dir.mkdir()
 
@@ -29,7 +30,7 @@ def new_project(project_directory_uri, tmp_path, monkeypatch):
     project_file.write_text(
         f"""\
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme @ {project_directory_uri}"]
+requires = ["hatchling", "hatch-fancy-pypi-readme @ {plugin_dir.as_uri()}"]
 build-backend = "hatchling.build"
 
 [project]
