@@ -81,7 +81,9 @@ class TextFragment:
         contents = cfg.pop(cls.key)
 
         if not contents:
-            raise ConfigurationError([f"text fragment: {cls.key} can't be empty."])
+            raise ConfigurationError(
+                [f"text fragment: {cls.key} can't be empty."]
+            )
 
         if cfg:
             raise ConfigurationError(
