@@ -12,7 +12,7 @@ license = "MIT"
 keywords = []
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Framework :: Hatch",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.7",
@@ -33,7 +33,7 @@ dependencies = [
 content-type = "text/markdown"
 text = """*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [*Hatch*](https://hatch.pypa.io/).
 
-Its purpose is to help you to have ✨fancy✨ PyPI readmes – unlike *this* one.
+Its purpose is to help you to have ✨fancy✨ PyPI readmes – unlike *this* one you’re looking at right now.
 
 Please check out the [documentation](https://github.com/hynek/hatch-fancy-pypi-readme#readme) to see what *hatch-fancy-pypi-readme* can do for you!
 """
