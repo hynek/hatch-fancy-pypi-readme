@@ -132,7 +132,7 @@ class FileFragment:
                 contents, _ = contents.split(end_before, 1)
             except ValueError:
                 errs.append(
-                    f"file fragment: 'end_before' {end_before!r} not found."
+                    f"file fragment: 'end-before' {end_before!r} not found."
                 )
 
         if pattern:
