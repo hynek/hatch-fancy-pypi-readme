@@ -65,7 +65,7 @@ dynamic = ["readme"]
 Next, you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
 
 Here, you **must** supply a `content-type`.
-Currently, only `text/markdown` and `text/x-rst` are supported.
+Currently, only `text/markdown` and `text/x-rst` are supported by PyPI.
 
 ```toml
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
@@ -145,7 +145,7 @@ together with:
 path = "path.md"
 start-after = "<!-- cut after this -->\n\n"
 end-before = "\n\n<!-- but before this -->"
-pattern = "the (.*) body"
+pattern = "the (.*)? body"
 ```
 
 would append:
