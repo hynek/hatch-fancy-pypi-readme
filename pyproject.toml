@@ -98,6 +98,13 @@ exclude_lines = [
   "^ +\\.\\.\\.$",
   "-> ['\"]?NoReturn['\"]?:",
 ]
+partial_branches = [
+  "pragma: no branch",
+  # _cli._fail never returns, creating uncovered branches as far as coverage.py
+  # is concerned. See
+  # https://github.com/nedbat/coveragepy/issues/1433#issuecomment-1211465570
+  "^\\s*_fail\\(",
+]
 
 
 [tool.black]
