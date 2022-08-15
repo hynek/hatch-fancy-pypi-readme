@@ -78,6 +78,7 @@ This is not strictly necessary, because our [*tox*] file contains an environment
 $ pre-commit run --all-files
 ```
 
+and our CI has integration with `pre-commit.ci <https://pre-commit.ci>`_.
 But it's way more comfortable to run it locally and *git* catching avoidable errors.
 
 
