@@ -116,7 +116,7 @@ Additionally it’s possible to cut away parts of the file before appending it:
 
 - **`start-after`** cuts away everything before the string specified.
 - **`end-before`** cuts away everything after.
-- **`pattern`** takes a [*regular expression*](https://docs.python.org/3/library/re.html) and returns the first group from it (you probably want to make your capture group non-greedy by appending a question mark: `(.*)?`).
+- **`pattern`** takes a [*regular expression*](https://docs.python.org/3/library/re.html) and returns the first group from it (you probably want to make your capture group non-greedy by appending a question mark: `(.*?)`).
   Internally, it uses
 
   ```python
@@ -146,7 +146,7 @@ together with:
 path = "path.md"
 start-after = "<!-- cut after this -->\n\n"
 end-before = "\n\n<!-- but before this -->"
-pattern = "the (.*)? body"
+pattern = "the (.*?) body"
 ```
 
 would append:

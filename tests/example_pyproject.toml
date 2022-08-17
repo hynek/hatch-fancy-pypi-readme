@@ -36,7 +36,7 @@ Now let's add an extract from [`tests/example_changelog.md`](https://github.com/
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "tests/example_changelog.md"
-pattern = "<!-- changelog follows -->\n\n\n(.*)?\n\n## "
+pattern = "<!-- changelog follows -->\n\n\n(.*?)\n\n## "
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 text = "\n---\n\nPretty **cool**, huh? ✨"

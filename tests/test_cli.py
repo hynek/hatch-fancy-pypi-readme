@@ -52,6 +52,7 @@ class TestCLIEndToEnd:
         out = run("hatch_fancy_pypi_readme", "tests/example_pyproject.toml")
 
         assert out.startswith("# Level 1 Header")
+        assert "1.0.0" not in out
 
     def test_ok_redirect(self, tmp_path):
         """

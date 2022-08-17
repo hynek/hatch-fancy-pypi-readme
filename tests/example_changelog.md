@@ -22,3 +22,10 @@ Your don't want this as part of your PyPI readme!
 ### Added
 
 - Everything.
+
+
+## 0.0.1 - 2020-03-01
+
+### Removed
+
+- Precedency.

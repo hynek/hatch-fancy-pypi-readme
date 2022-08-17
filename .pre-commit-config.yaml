@@ -27,6 +27,7 @@ repos:
     rev: v1.4.0
     hooks:
       - id: yesqa
+        additional_dependencies: [flake8-bugbear]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 5.0.4
