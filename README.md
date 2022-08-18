@@ -20,6 +20,7 @@ You’ve come to the right place!
 ### Showcases
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
+- [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - And finally of course [*hatch-fancy-pypi-readme* 22.2.0](https://pypi.org/project/hatch-fancy-pypi-readme/22.2.0/), before we had to stop dog-fooding ourselves to get a version out ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/61bfac7bc30040286c6fda0838ac918d94aabf6e/pyproject.toml#L48-L69)).
 
