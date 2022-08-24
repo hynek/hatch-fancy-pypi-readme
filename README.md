@@ -12,7 +12,7 @@ You want your PyPI readme to be the project readme, but without badges, followed
 You’ve come to the right place!
 
 > **Note**
-> PyPI project description, PyPI landing page, and PyPI readme all refer to the same thing.
+> "PyPI project description", "PyPI landing page", and "PyPI readme" all refer to the same thing.
 > In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
@@ -205,6 +205,8 @@ with our [example configuration][example-config], you will get the following out
 > While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
 > It will **not** help you debug **packaging issues**, though.
+>
+> To verify your PyPI readme using the full packaging pipeline, check out my s [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
 
 <!-- end docs -->
 
