@@ -64,6 +64,9 @@ Next, you must tell the build system that your readme is dynamic by adding it to
 dynamic = ["readme"]
 ```
 
+> **Note**:
+> Don’t forget to remove the old `readme` key!
+
 Next, you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
 
 Here, you **must** supply a `content-type`.
