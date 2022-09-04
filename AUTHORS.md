@@ -1,6 +1,6 @@
 # Authors
 
-*hatch-fancy-pypi-readme* is written and maintained by [Hynek Schlawack](https://hynek.me/).
+*hatch-fancy-pypi-readme* is written and maintained by [Hynek Schlawack](https://hynek.me/) and released under the [MIT license](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt).
 
 The development is kindly supported by [Variomedia AG](https://www.variomedia.de/) and all my amazing [GitHub Sponsors](https://github.com/sponsors/hynek).
 
