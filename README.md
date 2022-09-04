@@ -210,7 +210,7 @@ with our [example configuration][example-config], you will get the following out
 >
 > It will **not** help you debug **packaging issues**, though.
 >
-> To verify your PyPI readme using the full packaging pipeline, check out my s [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
+> To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
 
 <!-- end docs -->
 
