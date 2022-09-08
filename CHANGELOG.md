@@ -13,6 +13,13 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.3.0...HEAD)
 
+### Added
+
+- It is now possible to run regexp-based substitutions over the final readme.
+  [#9](https://github.com/hynek/hatch-fancy-pypi-readme/issues/9)
+  [#11](https://github.com/hynek/hatch-fancy-pypi-readme/issues/11)
+
+
 ## [22.3.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.2.0...22.3.0) - 2022-08-06
 
 ### Added

@@ -45,7 +45,7 @@ def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
             + "\n".join(f"- {msg}" for msg in e.errors),
         )
 
-    print(build_text(config.fragments), file=out)
+    print(build_text(config.fragments, config.substitutions), file=out)
 
 
 def _fail(msg: str) -> NoReturn:

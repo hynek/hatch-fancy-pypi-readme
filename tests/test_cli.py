@@ -54,6 +54,16 @@ class TestCLIEndToEnd:
         assert out.startswith("# Level 1 Header")
         assert "1.0.0" not in out
 
+        # Check substitutions
+        assert (
+            "[GitHub-relative link](https://github.com/hynek/"
+            "hatch-fancy-pypi-readme/tree/main/README.md)" in out
+        )
+        assert (
+            "Neat features. [#4](https://github.com/hynek/"
+            "hatch-fancy-pypi-readme/issues/4)" in out
+        )
+
     def test_ok_redirect(self, tmp_path):
         """
         It's possible to redirect output into a file.

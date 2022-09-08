@@ -68,3 +68,21 @@ class TestValidateConfig:
             == ei.value.errors
             == ei.value.args[0]
         )
+
+    def test_invalid_substitution(self):
+        """
+        Invalid substitutions are caught and reported.
+        """
+        with pytest.raises(ConfigurationError) as ei:
+            load_and_validate_config(
+                {
+                    "content-type": "text/markdown",
+                    "fragments": [{"text": "foo"}],
+                    "substitutions": [{"foo": "bar"}],
+                }
+            )
+
+        assert [
+            "substitution: missing `pattern` key.",
+            "substitution: missing `replacement` key.",
+        ] == ei.value.errors
