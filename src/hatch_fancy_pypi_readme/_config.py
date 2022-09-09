@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from ._fragments import Fragment, load_fragments
+from ._substitutions import Substituter, load_substitutions
 from .exceptions import ConfigurationError
 
 
@@ -15,6 +16,7 @@ from .exceptions import ConfigurationError
 class Config:
     content_type: str
     fragments: list[Fragment]
+    substitutions: list[Substituter]
 
 
 def load_and_validate_config(config: dict[str, Any]) -> Config:
@@ -41,7 +43,12 @@ def load_and_validate_config(config: dict[str, Any]) -> Config:
     except ConfigurationError as e:
         errs.extend(e.errors)
 
+    try:
+        subs = load_substitutions(config.get("substitutions", []))
+    except ConfigurationError as e:
+        errs.extend(e.errors)
+
     if errs:
         raise ConfigurationError(errs)
 
-    return Config(config["content-type"], frags)
+    return Config(config["content-type"], frags, subs)

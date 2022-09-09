@@ -25,7 +25,7 @@ class FancyReadmeMetadataHook(MetadataHookInterface):
 
         metadata["readme"] = {
             "content-type": config.content_type,
-            "text": build_text(config.fragments),
+            "text": build_text(config.fragments, config.substitutions),
         }
 
 

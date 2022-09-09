@@ -175,6 +175,38 @@ to your readme.
 For a complete example, please see our [example configuration][example-config].
 
 
+## Substitutions
+
+After a readme is assembled out of fragments, it's possible to run an arbitrary number of [regexp](https://docs.python.org/3/library/re.html)-based substitutions over it:
+
+```toml
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = "This is a (.*) that we'll replace later."
+replacement = "It was a '\\1'!"
+ignore_case = true  # optional; false by default
+```
+
+---
+
+Substitutions are for instance useful for replacing relative links with absolute ones:
+
+```toml
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# Literal TOML strings (single quotes) need no escaping of backslashes.
+pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
+replacement = '[\1](https://github.com/hynek/hatch-fancy-pypi-readme/tree/main\g<2>)'
+```
+
+or expanding GitHub issue/pull request IDs to links:
+
+```toml
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# Regular TOML strings (double quotes) do.
+pattern = "#(\\d+)"
+replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\1)"
+```
+
+
 ## CLI Interface
 
 For faster feedback loops, *hatch-fancy-pypi-readme* comes with a CLI interface that takes a `pyproject.toml` file as an argument and renders out the readme that would go into respective package.
