@@ -9,7 +9,7 @@
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
-Once you've assembled your readme, you can additionally run regular-expression substitutions over it. For instance to make relative links absolute or to linkify users and issue numbers in your changelog.
+Once you’ve assembled your readme, you can additionally run regular-expression substitutions over it. For instance to make relative links absolute or to linkify users and issue numbers in your changelog.
 
 Do you want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
@@ -175,7 +175,7 @@ For a complete example, please see our [example configuration][example-config].
 
 ## Substitutions
 
-After a readme is assembled out of fragments, it's possible to run an arbitrary number of [*regular expression*](https://docs.python.org/3/library/re.html)-based substitutions over it:
+After a readme is assembled out of fragments, it’s possible to run an arbitrary number of [*regular expression*](https://docs.python.org/3/library/re.html)-based substitutions over it:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
