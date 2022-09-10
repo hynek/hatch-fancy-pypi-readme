@@ -62,7 +62,7 @@ def load_and_validate_config(config: dict[str, Any]) -> Config:
         Draft202012Validator(
             SCHEMA, format_checker=Draft202012Validator.FORMAT_CHECKER
         ).iter_errors(config),
-        key=jsonschema.exceptions.relevance,  # type: ignore[no-any-return]
+        key=jsonschema.exceptions.relevance,
     )
     if errs:
         raise ConfigurationError(errors_to_human_strings(errs))

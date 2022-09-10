@@ -38,9 +38,9 @@ FILE_V = Draft202012Validator(
         "$schema": Draft202012Validator.META_SCHEMA["$id"],
         "type": "object",
         "properties": {
-            "path": {"type": "string", "pattern": ".+"},
-            "start-after": {"type": "string", "pattern": ".+"},
-            "end-before": {"type": "string", "pattern": ".+"},
+            "path": {"type": "string", "minLength": 1},
+            "start-after": {"type": "string", "minLength": 1},
+            "end-before": {"type": "string", "minLength": 1},
             "pattern": {"type": "string", "format": "regex"},
         },
         "required": ["path"],
