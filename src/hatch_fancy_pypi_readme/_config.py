@@ -98,7 +98,10 @@ def _load_fragments(config: list[dict[str, str]]) -> list[Fragment]:
                 continue
 
             try:
-                ves = tuple(frag.validator.iter_errors(frag_cfg))
+                ves = sorted(
+                    frag.validator.iter_errors(frag_cfg),
+                    key=jsonschema.exceptions.relevance,
+                )
                 if ves:
                     raise ConfigurationError(
                         errors_to_human_strings(ves, ("fragments", i))
