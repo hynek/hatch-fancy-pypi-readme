@@ -11,52 +11,47 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, Iterable
 
+from jsonschema import Validator
+
 
 if sys.version_info >= (3, 8):
     from typing import Protocol
 else:
     from typing_extensions import Protocol
+
+from ._validators import CustomValidator
 from .exceptions import ConfigurationError
 
 
-def load_fragments(config: list[dict[str, str]]) -> list[Fragment]:
-    """
-    Load all fragments from the fragments config list.
+TEXT_V = CustomValidator(
+    {
+        "$schema": CustomValidator.META_SCHEMA["$id"],
+        "type": "object",
+        "properties": {"text": {"type": "string", "minLength": 1}},
+        "required": ["text"],
+        "additionalProperties": False,
+    }
+)
 
-    Raise ConfigurationError on unknown or misconfigured ones.
-    """
-    if not config:
-        raise ConfigurationError(
-            [
-                "tool.hatch.metadata.hooks.fancy-pypi-readme.fragments must "
-                "not be empty."
-            ]
-        )
-
-    frags = []
-    errs = []
-    for frag_cfg in config:
-        for frag in _VALID_FRAGMENTS:
-            if frag.key not in frag_cfg:
-                continue
-
-            try:
-                frags.append(frag.from_config(frag_cfg))
-            except ConfigurationError as e:
-                errs.extend(e.errors)
-
-            break
-        else:
-            errs.append(f"Unknown fragment type {frag_cfg!r}.")
-
-    if errs:
-        raise ConfigurationError(errs)
-
-    return frags
+FILE_V = CustomValidator(
+    {
+        "$schema": CustomValidator.META_SCHEMA["$id"],
+        "type": "object",
+        "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "start-after": {"type": "string", "minLength": 1},
+            "end-before": {"type": "string", "minLength": 1},
+            "pattern": {"type": "string", "regex": True},
+        },
+        "required": ["path"],
+        "additionalProperties": False,
+    }
+)
 
 
 class Fragment(Protocol):
     key: ClassVar[str]
+    validator: ClassVar[Validator]
 
     @classmethod
     def from_config(self, cfg: dict[str, str]) -> Fragment:
@@ -73,24 +68,13 @@ class TextFragment:
     """
 
     key: ClassVar[str] = "text"
+    validator: ClassVar[Validator] = TEXT_V
 
     _text: str
 
     @classmethod
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        contents = cfg.pop(cls.key)
-
-        if not contents:
-            raise ConfigurationError(
-                [f"text fragment: {cls.key} can't be empty."]
-            )
-
-        if cfg:
-            raise ConfigurationError(
-                [f"text fragment: unknown option: {o}" for o in cfg.keys()]
-            )
-
-        return cls(contents)
+        return cls(cfg[cls.key])
 
     def render(self) -> str:
         return self._text
@@ -103,6 +87,7 @@ class FileFragment:
     """
 
     key: ClassVar[str] = "path"
+    validator: ClassVar[Validator] = FILE_V
 
     _contents: str
 
@@ -114,12 +99,11 @@ class FileFragment:
         pattern = cfg.pop("pattern", None)
 
         errs: list[str] = []
-        if cfg:
-            errs.extend(
-                f"file fragment: unknown option: {o!r}" for o in cfg.keys()
-            )
 
-        contents = path.read_text(encoding="utf-8")
+        try:
+            contents = path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            raise ConfigurationError([f"Fragment file '{path}' not found."])
 
         if start_after is not None:
             try:
@@ -138,22 +122,17 @@ class FileFragment:
                 )
 
         if pattern:
-            try:
-                m = re.search(pattern, contents, re.DOTALL)
-                if not m:
+            m = re.search(pattern, contents, re.DOTALL)
+            if not m:
+                errs.append(f"file fragment: pattern {pattern!r} not found.")
+            else:
+                try:
+                    contents = m.group(1)
+                except IndexError:
                     errs.append(
-                        f"file fragment: pattern {pattern!r} not found."
+                        "file fragment: pattern matches, but no group "
+                        "defined."
                     )
-                else:
-                    try:
-                        contents = m.group(1)
-                    except IndexError:
-                        errs.append(
-                            "file fragment: pattern matches, but no group "
-                            "defined."
-                        )
-            except re.error as e:
-                errs.append(f"file fragment: invalid pattern {pattern!r}: {e}")
 
         if errs:
             raise ConfigurationError(errs)
@@ -164,4 +143,4 @@ class FileFragment:
         return self._contents
 
 
-_VALID_FRAGMENTS: Iterable[type[Fragment]] = (TextFragment, FileFragment)
+VALID_FRAGMENTS: Iterable[type[Fragment]] = (TextFragment, FileFragment)

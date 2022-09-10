@@ -29,6 +29,7 @@ classifiers = [
 ]
 dependencies = [
   "hatchling",
+  "jsonschema",
   "tomli; python_version<'3.11'",
   "typing-extensions; python_version<'3.8'",
 ]
@@ -116,9 +117,13 @@ profile = "attrs"
 
 
 [tool.mypy]
+show_error_codes = true
+enable_error_code = ["ignore-without-code"]
 strict = true
 follow_imports = "normal"
 warn_no_return = true
+ignore_missing_imports = true
+
 
 [[tool.mypy.overrides]]
 module = "tests.*"

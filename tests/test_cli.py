@@ -121,10 +121,10 @@ class TestCLI:
 
         assert (
             "Configuration has errors:\n\n"
-            "- Missing tool.hatch.metadata.hooks.fancy-pypi-readme."
-            "content-type setting.\n"
-            "- Missing tool.hatch.metadata.hooks.fancy-pypi-readme.fragments "
-            "setting.\n" == err
+            "- tool.hatch.metadata.hooks.fancy-pypi-readme."
+            "content-type is missing.\n"
+            "- tool.hatch.metadata.hooks.fancy-pypi-readme.fragments "
+            "is missing.\n" == err
         )
         assert "" == out
 
