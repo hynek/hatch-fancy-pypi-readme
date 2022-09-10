@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme"]
+requires = ["hatchling", "hatch-fancy-pypi-readme>=22.4.0"]
 build-backend = "hatchling.build"
 
 

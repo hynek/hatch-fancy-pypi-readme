@@ -13,6 +13,10 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.4.0...HEAD)
 
+### Changed
+
+- Absolutely nothing -- just working around the hen-egg problem to use substitutions in the PyPI readme!
+
 
 ## [22.4.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.3.0...22.4.0) - 2022-09-10
 
