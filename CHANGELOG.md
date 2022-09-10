@@ -18,7 +18,7 @@ The **third number** is for emergencies when we need to start branches for older
 
 ### Changed
 
-- Absolutely nothing -- just working around the hen-egg problem to use substitutions in the PyPI readme!
+- Absolutely nothing – just working around the hen-egg problem to use substitutions in the PyPI readme!
 
 
 ## [22.4.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.3.0...22.4.0) - 2022-09-10
@@ -37,7 +37,7 @@ The **third number** is for emergencies when we need to start branches for older
 - Support for Python 3.7.
   While our Python version only applies when building a package, a package is built whenever it is installed.
   This includes *tox* environments.
-  *hatch-fancy-pypi-readme* will always *at least* support the same Python version as the latest version of *Hatchling* – *Hatch*'s build backend – does.
+  *hatch-fancy-pypi-readme* will always *at least* support the same Python version as the latest version of *Hatchling* – *Hatch*’s build backend – does.
 
   To get this version out, we had to stop dog-fooding *hatch-fancy-pypi-readme*. 😢
 
