@@ -231,7 +231,7 @@ class TestValidateConfigSubstitutions:
 
         assert {
             "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions.0."
-            "pattern: 'foo???' is not a 'regex'",
+            "pattern: 'foo???' is not a valid Python regular expression",
         } == set(ei.value.errors)
 
     def test_replacement_not_a_string(self):

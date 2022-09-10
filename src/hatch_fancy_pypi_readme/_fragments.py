@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, Iterable
 
-from jsonschema import Draft202012Validator, Validator
+from jsonschema import Validator
 
 
 if sys.version_info >= (3, 8):
@@ -19,34 +19,33 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Protocol
 
+from ._validators import CustomValidator
 from .exceptions import ConfigurationError
 
 
-TEXT_V = Draft202012Validator(
+TEXT_V = CustomValidator(
     {
-        "$schema": Draft202012Validator.META_SCHEMA["$id"],
+        "$schema": CustomValidator.META_SCHEMA["$id"],
         "type": "object",
         "properties": {"text": {"type": "string", "minLength": 1}},
         "required": ["text"],
         "additionalProperties": False,
-    },
-    format_checker=Draft202012Validator.FORMAT_CHECKER,
+    }
 )
 
-FILE_V = Draft202012Validator(
+FILE_V = CustomValidator(
     {
-        "$schema": Draft202012Validator.META_SCHEMA["$id"],
+        "$schema": CustomValidator.META_SCHEMA["$id"],
         "type": "object",
         "properties": {
             "path": {"type": "string", "minLength": 1},
             "start-after": {"type": "string", "minLength": 1},
             "end-before": {"type": "string", "minLength": 1},
-            "pattern": {"type": "string", "format": "regex"},
+            "pattern": {"type": "string", "regex": True},
         },
         "required": ["path"],
         "additionalProperties": False,
-    },
-    format_checker=Draft202012Validator.FORMAT_CHECKER,
+    }
 )
 
 

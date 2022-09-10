@@ -82,4 +82,5 @@ _VALIDATOR_TO_FORMATTER = {
     "additionalProperties": _format_additional_fields,
     "format": _format_path_w_message,
     "enum": _format_path_w_message,
+    "regex": _format_path_w_message,
 }

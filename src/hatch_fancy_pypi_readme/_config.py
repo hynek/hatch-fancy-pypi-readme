@@ -9,11 +9,10 @@ from typing import Any
 
 import jsonschema
 
-from jsonschema import Draft202012Validator
-
 from ._fragments import VALID_FRAGMENTS, Fragment
 from ._humanize_validation_errors import errors_to_human_strings
 from ._substitutions import Substituter
+from ._validators import CustomValidator
 from .exceptions import ConfigurationError
 
 
@@ -25,7 +24,7 @@ class Config:
 
 
 SCHEMA = {
-    "$schema": Draft202012Validator.META_SCHEMA["$id"],
+    "$schema": CustomValidator.META_SCHEMA["$id"],
     "type": "object",
     "properties": {
         "content-type": {
@@ -43,7 +42,7 @@ SCHEMA = {
             "items": {
                 "type": "object",
                 "properties": {
-                    "pattern": {"type": "string", "format": "regex"},
+                    "pattern": {"type": "string", "regex": True},
                     "replacement": {"type": "string"},
                     "ignore-case": {"type": "boolean"},
                 },
@@ -59,9 +58,7 @@ SCHEMA = {
 
 def load_and_validate_config(config: dict[str, Any]) -> Config:
     errs = sorted(
-        Draft202012Validator(
-            SCHEMA, format_checker=Draft202012Validator.FORMAT_CHECKER
-        ).iter_errors(config),
+        CustomValidator(SCHEMA).iter_errors(config),
         key=jsonschema.exceptions.relevance,
     )
     if errs:
