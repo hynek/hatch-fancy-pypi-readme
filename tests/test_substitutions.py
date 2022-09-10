@@ -4,33 +4,7 @@
 
 from __future__ import annotations
 
-import pytest
-
-from hatch_fancy_pypi_readme._substitutions import (
-    Substituter,
-    load_substitutions,
-)
-from hatch_fancy_pypi_readme.exceptions import ConfigurationError
-
-
-class TestLoadSubstitutions:
-    def test_empty(self):
-        """
-        Having no substitutions is fine.
-        """
-        assert [] == load_substitutions([])
-
-    def test_error(self):
-        """
-        Invalid substitutions are caught and reported.
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            load_substitutions([{"in": "valid"}])
-
-        assert [
-            "substitution: missing `pattern` key.",
-            "substitution: missing `replacement` key.",
-        ] == ei.value.errors
+from hatch_fancy_pypi_readme._substitutions import Substituter
 
 
 VALID = {"pattern": "f(o)o", "replacement": r"bar\g<1>bar"}
@@ -52,26 +26,6 @@ class TestSubstituter:
 
         assert "xxx barobar yyy" == sub.substitute("xxx foo yyy")
 
-    @pytest.mark.parametrize(
-        "cfg, errs",
-        [
-            ({}, ["missing `pattern` key.", "missing `replacement` key."]),
-            (cow_valid(ignore_case=42), ["`ignore_case` must be a bool."]),
-            (
-                cow_valid(pattern="???"),
-                ["can't compile pattern: nothing to repeat at position 0"],
-            ),
-        ],
-    )
-    def test_catches_all_errors(self, cfg, errs):
-        """
-        All errors are caught and reported.
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            Substituter.from_config(cfg)
-
-        assert errs == ei.value.errors
-
     def test_twisted(self):
         """
         Twisted example works.
@@ -84,7 +38,7 @@ class TestSubstituter:
             {
                 "pattern": r"`([^`]+)\s+<(?!https?://)([^>]+)>`_",
                 "replacement": r"`\1 <https://github.com/twisted/twisted/blob/trunk/\2>`_",  # noqa
-                "ignore_case": True,
+                "ignore-case": True,
             }
         ).substitute(
             "For information on changes in this release, see the `NEWS <NEWS.rst>`_ file."  # noqa

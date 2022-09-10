@@ -182,8 +182,8 @@ After a readme is assembled out of fragments, it's possible to run an arbitrary 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 pattern = "This is a (.*) that we'll replace later."
-replacement = "It was a '\\1'!"
-ignore_case = true  # optional; false by default
+replacement = 'It was a '\1'!'
+ignore-case = true  # optional; false by default
 ```
 
 ---

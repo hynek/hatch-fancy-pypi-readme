@@ -10,22 +10,11 @@ from pathlib import Path
 
 import pytest
 
-from hatch_fancy_pypi_readme._fragments import (
-    FileFragment,
-    TextFragment,
-    load_fragments,
-)
+from hatch_fancy_pypi_readme._fragments import FileFragment, TextFragment
 from hatch_fancy_pypi_readme.exceptions import ConfigurationError
 
 
 class TestTextFragment:
-    def test_cfg_empty_text(self):
-        """
-        Empty text keys raise a ConfigurationError.
-        """
-        with pytest.raises(ConfigurationError, match="can't be empty"):
-            TextFragment.from_config({"text": ""})
-
     def test_ok(self):
         """
         The text that is passed in is rendered without changes.
@@ -109,20 +98,6 @@ This is the *interesting* body!"""
             ).render()
         )
 
-    def test_unknown_options(self, txt_path):
-        """
-        Unknown options are caught and raised at ConfiguratinErrors
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            FileFragment.from_config(
-                {"path": str(txt_path), "foo": "bar", "baz": "qux"}
-            )
-
-        assert [
-            "file fragment: unknown option: 'foo'",
-            "file fragment: unknown option: 'baz'",
-        ] == ei.value.errors
-
     def test_start_after_end_before_not_found(self, txt_path):
         """
         If `start-after` and/or `end-before` don't exist, a helpful error is
@@ -140,22 +115,6 @@ This is the *interesting* body!"""
         assert [
             "file fragment: 'start-after' 'nope' not found.",
             "file fragment: 'end-before' 'also nope' not found.",
-        ] == ei.value.errors
-
-    def test_invalid_pattern(self, txt_path):
-        """
-        re-compilation errors are caught and reported.
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            FileFragment.from_config(
-                {
-                    "path": str(txt_path),
-                    "pattern": r"**",
-                }
-            )
-        assert [
-            "file fragment: invalid pattern '**': nothing to repeat at "
-            "position 0"
         ] == ei.value.errors
 
     def test_pattern_no_match(self, txt_path):
@@ -201,38 +160,3 @@ This is the *interesting* body!"""
                 }
             ).render()
         )
-
-
-class TestLoadFragments:
-    def test_invalid_fragment_type(self):
-        """
-        Invalid fragment types are reported.
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            load_fragments(
-                [
-                    {"text": "this is ok"},
-                    {"foo": "this is not"},
-                    {"bar": "neither is this"},
-                ]
-            )
-
-        assert [
-            "Unknown fragment type {'foo': 'this is not'}.",
-            "Unknown fragment type {'bar': 'neither is this'}.",
-        ] == ei.value.errors
-
-    def test_invalid_config(self):
-        """
-        If the config of a fragment raiss a Configuration error, collect it and
-        raise it at the end.
-        """
-        with pytest.raises(ConfigurationError) as ei:
-            load_fragments(
-                [
-                    {"text": "this is ok"},
-                    {"text": "this is not", "because": "of this"},
-                ]
-            )
-
-        assert ["text fragment: unknown option: because"] == ei.value.errors
