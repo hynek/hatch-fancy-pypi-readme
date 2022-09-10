@@ -22,7 +22,13 @@ def _plugin_dir():
     with TemporaryDirectory() as d:
         directory = Path(d, "plugin")
         shutil.copytree(Path.cwd() / "src", directory / "src")
-        for fn in ["pyproject.toml", "LICENSE.txt"]:
+        for fn in [
+            "pyproject.toml",
+            "AUTHORS.md",
+            "CHANGELOG.md",
+            "LICENSE.txt",
+            "README.md",
+        ]:
             shutil.copy(Path.cwd() / fn, directory / fn)
 
         yield directory.resolve()

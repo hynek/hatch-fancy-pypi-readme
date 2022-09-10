@@ -25,24 +25,23 @@ You’ve come to the right place!
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
-- And finally of course [*hatch-fancy-pypi-readme* 22.2.0](https://pypi.org/project/hatch-fancy-pypi-readme/22.2.0/), before we had to stop dog-fooding ourselves to get a version out ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/61bfac7bc30040286c6fda0838ac918d94aabf6e/pyproject.toml#L48-L69)).
+- And of course [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/) itself ([`pyproject.toml`](pyproject.toml)).
+
+<!-- start docs -->
 
 Feel free to [open a PR](https://github.com/hynek/hatch-fancy-pypi-readme/edit/main/README.md) to add *your* ✨fancy✨ project!
 
 
 ## Motivation
 
-The main reason for my (past) hesitancy to move away from `setup.py` files is that I like to make my PyPI readmes a lot more than static strings or static files.
+The main reason for my (past) hesitancy to move away from `setup.py` files is that I like to make my PyPI readmes a lot more interesting, than what static strings or static files can offer me.
 
 For example [this](https://github.com/python-attrs/attrs/blob/b3dfebe2e10b44437c4f97d788fb5220d790efd0/setup.py#L110-L124) is the code that gave me the PyPI readme for [*attrs* 22.1.0](https://pypi.org/project/attrs/22.1.0/).
 Especially having a summary of the *latest* changes is something I’ve found users to appreciate.
 
-The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience.
-
-With [*Hatch*] we got a standards-based packaging library that offers exactly the plugin interface I needed.
+[*Hatch*]’s extensibility finally allowed me to build this plugin that allows you to switch away from `setup.py` without compromising on the user experience.
 Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
 
-<!-- start docs -->
 
 ## Configuration
 
@@ -248,11 +247,11 @@ with our [example configuration][example-config], you will get the following out
 ## Project Links
 
 - **License**: [MIT](LICENSE.txt)
-- **PyPI**: https://pypi.org/project/hatch-fancy-pypi-readme/
-- **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
 - **Documentation**:  https://github.com/hynek/hatch-fancy-pypi-readme#readme
 - **Changelog**: [CHANGELOG.md](CHANGELOG.md)
-- **Supported Python Versions**: 3.7 and later.
+- **PyPI**: https://pypi.org/project/hatch-fancy-pypi-readme/
+- **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
+- **Supported Python Versions**: 3.7 and later (follows [*Hatch*])
 
 [example-config]: tests/example_pyproject.toml
 [*Hatch*]: https://hatch.pypa.io/
