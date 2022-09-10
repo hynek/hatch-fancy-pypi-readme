@@ -22,6 +22,9 @@ def is_regex(
     instance: Any,
     schema: jsonschema.Schema,
 ) -> Generator[jsonschema.ValidationError, None, None]:
+    if not validator.is_type(instance, "string"):
+        return
+
     try:
         re.compile(instance)
     except (re.error, ValueError):

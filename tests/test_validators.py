@@ -6,7 +6,7 @@ import pytest
 
 from jsonschema import ValidationError
 
-from hatch_fancy_pypi_readme._validators import CustomValidator
+from hatch_fancy_pypi_readme._validators import CustomValidator, is_regex
 
 
 validator = CustomValidator({"type": "string", "regex": True})
@@ -60,3 +60,10 @@ class TestIsRegexValidator:
             v.validate(42)
 
         assert "42 is not of type 'string'" == ei.value.message
+
+    def test_not_a_string_direct(self):
+        """
+        The order in that the validators run is not guaranteed, so check we
+        can handle getting a non-string passed.
+        """
+        assert () == tuple(is_regex(validator, True, 42, None))
