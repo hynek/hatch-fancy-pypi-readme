@@ -4,6 +4,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from hatch_fancy_pypi_readme._substitutions import Substituter
 
 
@@ -43,3 +45,35 @@ class TestSubstituter:
         ).substitute(
             "For information on changes in this release, see the `NEWS <NEWS.rst>`_ file."  # noqa
         )
+
+    @pytest.mark.parametrize(
+        "pat,repl,text,expect",
+        [
+            (
+                r"#(\d+)",
+                r"[#\1](https://github.com/pydantic/pydantic/issues/\1)",
+                "* Foo #4224, #4470 Bar",
+                "* Foo [#4224](https://github.com/pydantic/pydantic/issues/"
+                "4224), [#4470](https://github.com/pydantic/pydantic/issues/"
+                "4470) Bar",
+            ),
+            (
+                r"( +)@([\w\-]+)",
+                r"\1[@\2](https://github.com/\2)",
+                "foo @github-user bar",
+                "foo [@github-user](https://github.com/github-user) bar",
+            ),
+        ],
+    )
+    def test_pydantic(self, pat, repl, text, expect):
+        """
+        Pydantic examples work.
+        https://github.com/hynek/hatch-fancy-pypi-readme/issues/9#issuecomment-1238584908
+        """
+        assert expect == Substituter.from_config(
+            {
+                "pattern": pat,
+                "replacement": repl,
+                "ignore-case": True,
+            }
+        ).substitute(text)
