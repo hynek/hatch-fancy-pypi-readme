@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 [project]
 dynamic = ["readme"]
 name = "hatch-fancy-pypi-readme"
-version = "22.4.0"
+version = "22.5.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
 requires-python = ">=3.7"
 keywords = ["hatch", "pypi", "readme", "documentation"]
