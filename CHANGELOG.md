@@ -15,7 +15,7 @@ The **third number** is for emergencies when we need to start branches for older
 
 ### Added
 
-- It is now possible to run regexp-based substitutions over the final readme.
+- It is now possible to run *regular expression*-based substitutions over the final readme.
   [#9](https://github.com/hynek/hatch-fancy-pypi-readme/issues/9)
   [#11](https://github.com/hynek/hatch-fancy-pypi-readme/issues/11)
 

@@ -9,11 +9,13 @@
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
-You want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
+Once you've assembled your readme, you can additionally run regular-expression substitutions over it. For instance to make relative links absolute or to linkify users and issue numbers in your changelog.
+
+Do you want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
 
 > **Note**
-> "PyPI project description", "PyPI landing page", and "PyPI readme" all refer to the same thing.
+> “PyPI project description”, “PyPI landing page”, and “PyPI readme” all refer to the same thing.
 > In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
@@ -30,15 +32,12 @@ Feel free to [open a PR](https://github.com/hynek/hatch-fancy-pypi-readme/edit/m
 
 ## Motivation
 
-In the olden days of `setup.py` files, I’ve taken advantage of the fact that I can write Python to have compelling PyPI readmes.
+The main reason for my (past) hesitancy to move away from `setup.py` files is that I like to make my PyPI readmes a lot more than static strings or static files.
 
 For example [this](https://github.com/python-attrs/attrs/blob/b3dfebe2e10b44437c4f97d788fb5220d790efd0/setup.py#L110-L124) is the code that gave me the PyPI readme for [*attrs* 22.1.0](https://pypi.org/project/attrs/22.1.0/).
-Especially having a summary of the latest changes is something I’ve found users to appreciate.
+Especially having a summary of the *latest* changes is something I’ve found users to appreciate.
 
-The move away from dynamic `setup.py` files to static `pyproject.toml` configurations is great, but it robbed me of being able to provide this service to my users.
-I’ve been able to add some dynamism using the wonderful [*Cog*](https://nedbatchelder.com/code/cog/), but it’s a bit awkward and shouldn’t be the long-term solution.
-
-The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience and without needing third-party tools for configuration-file templating.
+The goal of this plugin is to be able to switch away from `setup.py` without compromising on the user experience.
 
 With [*Hatch*] we got a standards-based packaging library that offers exactly the plugin interface I needed.
 Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
@@ -49,7 +48,7 @@ Now *you* too can have fancy PyPI readmes – just by adding a few lines of conf
 
 *hatch-fancy-pypi-readme* is, like [*Hatch*], configured in your project’s `pyproject.toml`.
 
-First you have to add *hatch-fancy-pypi-readme* to your `[build-system]`:
+First you add *hatch-fancy-pypi-readme* to your `[build-system]`:
 
 ```toml
 [build-system]
@@ -57,7 +56,7 @@ requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 ```
 
-Next, you must tell the build system that your readme is dynamic by adding it to the `project.dynamic` list:
+Next, you tell the build system that your readme is dynamic by adding it to the `project.dynamic` list:
 
 ```toml
 [project]
@@ -68,7 +67,7 @@ dynamic = ["readme"]
 > **Note**:
 > Don’t forget to remove the old `readme` key!
 
-Next, you must add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
+Next, you add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
 
 Here, you **must** supply a `content-type`.
 Currently, only `text/markdown` and `text/x-rst` are supported by PyPI.
@@ -177,12 +176,12 @@ For a complete example, please see our [example configuration][example-config].
 
 ## Substitutions
 
-After a readme is assembled out of fragments, it's possible to run an arbitrary number of [regexp](https://docs.python.org/3/library/re.html)-based substitutions over it:
+After a readme is assembled out of fragments, it's possible to run an arbitrary number of [*regular expression*](https://docs.python.org/3/library/re.html)-based substitutions over it:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 pattern = "This is a (.*) that we'll replace later."
-replacement = 'It was a '\1'!'
+replacement = 'It was a "\1"!'
 ignore-case = true  # optional; false by default
 ```
 
@@ -197,7 +196,7 @@ pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
 replacement = '[\1](https://github.com/hynek/hatch-fancy-pypi-readme/tree/main\g<2>)'
 ```
 
-or expanding GitHub issue/pull request IDs to links:
+Or expanding GitHub issue/pull request IDs to links:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
@@ -235,7 +234,7 @@ $ pipx run hatch-fancy-pypi-readme | pipx run rich-cli --markdown --hyperlinks -
 
 with our [example configuration][example-config], you will get the following output:
 
-![rich-cli output](https://raw.githubusercontent.com/hynek/hatch-fancy-pypi-readme/main/rich-cli-out.svg)
+![rich-cli output](rich-cli-out.svg)
 
 > **Warning**
 > While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
@@ -248,12 +247,12 @@ with our [example configuration][example-config], you will get the following out
 
 ## Project Links
 
-- **License**: [MIT](https://choosealicense.com/licenses/mit/)
+- **License**: [MIT](LICENSE.txt)
 - **PyPI**: https://pypi.org/project/hatch-fancy-pypi-readme/
 - **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
 - **Documentation**:  https://github.com/hynek/hatch-fancy-pypi-readme#readme
-- **Changelog**: https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELOG.md
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 - **Supported Python Versions**: 3.7 and later.
 
-[example-config]: https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/tests/example_pyproject.toml
+[example-config]: tests/example_pyproject.toml
 [*Hatch*]: https://hatch.pypa.io/
