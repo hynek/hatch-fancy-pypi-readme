@@ -24,8 +24,9 @@ from .exceptions import ConfigurationError
 
 TEXT_V = Draft202012Validator(
     {
+        "$schema": Draft202012Validator.META_SCHEMA["$id"],
         "type": "object",
-        "properties": {"text": {"type": "string", "pattern": ".+"}},
+        "properties": {"text": {"type": "string", "minLength": 1}},
         "required": ["text"],
         "additionalProperties": False,
     },
@@ -34,6 +35,7 @@ TEXT_V = Draft202012Validator(
 
 FILE_V = Draft202012Validator(
     {
+        "$schema": Draft202012Validator.META_SCHEMA["$id"],
         "type": "object",
         "properties": {
             "path": {"type": "string", "pattern": ".+"},

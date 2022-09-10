@@ -55,13 +55,6 @@ def _format_wrong_type(path: FieldPath, e: ValidationError) -> str:
     return f"{_dot_path(path)} is of wrong type: {e.message}"
 
 
-def _format_pattern_mismatch(path: FieldPath, e: ValidationError) -> str:
-    if e.validator_value == ".+":
-        return f"{_dot_path(path)} must not be empty."
-
-    return f"{_dot_path(path)}: {e.message}"
-
-
 def _format_path_w_message(path: FieldPath, e: ValidationError) -> str:
     return f"{_dot_path(path)}: {e.message}"
 
@@ -85,8 +78,8 @@ _VALIDATOR_TO_FORMATTER = {
     "required": _format_missing,
     "type": _format_wrong_type,
     "minItems": _format_not_enough,
+    "minLength": _format_not_enough,
     "additionalProperties": _format_additional_fields,
     "format": _format_path_w_message,
     "enum": _format_path_w_message,
-    "pattern": _format_pattern_mismatch,
 }

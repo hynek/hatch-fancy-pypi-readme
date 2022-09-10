@@ -7,6 +7,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+import jsonschema
+
 from jsonschema import Draft202012Validator
 
 from ._fragments import VALID_FRAGMENTS, Fragment
@@ -23,6 +25,7 @@ class Config:
 
 
 SCHEMA = {
+    "$schema": Draft202012Validator.META_SCHEMA["$id"],
     "type": "object",
     "properties": {
         "content-type": {
@@ -53,15 +56,13 @@ SCHEMA = {
     "additionalProperties": False,
 }
 
-V = Draft202012Validator(
-    SCHEMA, format_checker=Draft202012Validator.FORMAT_CHECKER
-)
-
 
 def load_and_validate_config(config: dict[str, Any]) -> Config:
     errs = sorted(
-        V.iter_errors(config),
-        key=lambda e: e.path,  # type: ignore[no-any-return]
+        Draft202012Validator(
+            SCHEMA, format_checker=Draft202012Validator.FORMAT_CHECKER
+        ).iter_errors(config),
+        key=jsonschema.exceptions.relevance,  # type: ignore[no-any-return]
     )
     if errs:
         raise ConfigurationError(errors_to_human_strings(errs))
