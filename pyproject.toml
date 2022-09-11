@@ -1,10 +1,9 @@
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme>=22.4.0"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 
 [project]
-dynamic = ["readme"]
 name = "hatch-fancy-pypi-readme"
 version = "22.6.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
@@ -54,6 +53,23 @@ Changelog = "https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELO
 "Source Code" = "https://github.com/hynek/hatch-fancy-pypi-readme"
 Funding = "https://github.com/sponsors/hynek"
 Ko-fi = "https://ko-fi.com/the_hynek"
+
+[project.readme]
+content-type = "text/markdown"
+text = """# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme! 🧐
+
+[![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
+[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
+[![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
+
+
+*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [*Hatch*](https://hatch.pypa.io/).
+
+Its purpose is to help you to have fancy PyPI readmes – unlike *this* one you’re looking at right now.
+
+Please check out the [documentation](https://github.com/hynek/hatch-fancy-pypi-readme#readme) to see what *hatch-fancy-pypi-readme* can do for you and your projects!
+"""
 
 
 [tool.pytest.ini_options]
@@ -120,49 +136,3 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 ignore_errors = true
-
-
-[tool.hatch.metadata.hooks.fancy-pypi-readme]
-content-type = "text/markdown"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "README.md"
-end-before = "\n<!-- start docs -->"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "README.md"
-start-after = "\n<!-- end docs -->"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = "\n\n## Credits\n"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "AUTHORS.md"
-start-after = "# Authors\n"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = """
-
-
-## Release Information for """
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "CHANGELOG.md"
-start-after = "<!-- changelog follows -->"
-pattern = "## ([^\n]+?\n\n)###"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "CHANGELOG.md"
-start-after = "<!-- changelog follows -->"
-pattern = "\n(###.+?\n)## "
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-text = """---
-
-Full changelog can be found [here](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELOG.md).
-"""
-
-# Make GitHub-relative links absolute.
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/hynek/hatch-fancy-pypi-readme/tree/main/\g<2>)'

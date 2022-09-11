@@ -25,7 +25,7 @@ You’ve come to the right place!
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
-- And of course [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/) itself ([`pyproject.toml`](pyproject.toml)).
+- And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static one to prevent a circular dependency that’s problematic in some cases.
 
 <!-- start docs -->
 
