@@ -9,7 +9,8 @@
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
-Once you’ve assembled your readme, you can additionally run regular-expression substitutions over it. For instance to make relative links absolute or to linkify users and issue numbers in your changelog.
+Once you’ve assembled your readme, you can additionally run **regular expression-based substitutions** over it.
+For instance to make relative links absolute or to linkify users and issue numbers in your changelog.
 
 Do you want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
@@ -25,7 +26,8 @@ You’ve come to the right place!
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
-- And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static one to prevent a circular dependency that’s problematic in some cases.
+- And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static readme to avoid a circular dependency that can be problematic in some cases.
+  The shoemaker’s kids always go barefoot.
 
 <!-- start docs -->
 
