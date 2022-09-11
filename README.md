@@ -188,7 +188,7 @@ ignore-case = true  # optional; false by default
 
 ---
 
-Substitutions are for instance useful for replacing relative links with absolute ones:
+Substitutions can be useful for replacing relative links with absolute ones:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
@@ -205,6 +205,8 @@ Or expanding GitHub issue/pull request IDs to links:
 pattern = "#(\\d+)"
 replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\1)"
 ```
+
+Again, please check out our [example configuration][example-config] for a complete example.
 
 
 ## CLI Interface
