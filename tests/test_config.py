@@ -113,10 +113,7 @@ class TestValidateConfigFragments:
         with pytest.raises(ConfigurationError) as ei:
             load_and_validate_config(cow_add_frag(text=""))
 
-        assert [
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.fragments.0.text "
-            "must not be empty."
-        ] == ei.value.errors
+        assert ["Text fragments must not be empty."] == ei.value.errors
 
     def test_invalid_fragments(self):
         """
@@ -182,12 +179,8 @@ class TestValidateConfigSubstitutions:
             )
 
         assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions"
-            ".0.pattern is missing.",
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions"
-            ".0.replacement is missing.",
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions.0"
-            ".foo: extra field not permitted.",
+            "Substitution {'foo': 'bar'} is missing a 'pattern' key.",
+            "Substitution {'foo': 'bar'} is missing a 'replacement' key.",
         } == set(ei.value.errors)
 
     def test_empty(self):
@@ -198,10 +191,8 @@ class TestValidateConfigSubstitutions:
             load_and_validate_config(cow_add_sub())
 
         assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions"
-            ".0.pattern is missing.",
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions"
-            ".0.replacement is missing.",
+            "Substitution {} is missing a 'pattern' key.",
+            "Substitution {} is missing a 'replacement' key.",
         } == set(ei.value.errors)
 
     def test_ignore_case_not_bool(self):
@@ -215,10 +206,9 @@ class TestValidateConfigSubstitutions:
                 )
             )
 
-        assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions.0."
-            "ignore-case is of wrong type: 42 is not of type 'boolean'"
-        } == set(ei.value.errors)
+        assert {"Value 42 for 'ignore-case' is not a bool."} == set(
+            ei.value.errors
+        )
 
     def test_pattern_no_valid_regexp(self):
         """
@@ -230,8 +220,8 @@ class TestValidateConfigSubstitutions:
             )
 
         assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions.0."
-            "pattern: 'foo???' is not a valid Python regular expression",
+            "'foo???' is not a valid regular expression: multiple repeat at "
+            "position 5"
         } == set(ei.value.errors)
 
     def test_replacement_not_a_string(self):
@@ -243,10 +233,9 @@ class TestValidateConfigSubstitutions:
                 cow_add_sub(pattern="foo", replacement=42)
             )
 
-        assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions.0."
-            "replacement is of wrong type: 42 is not of type 'string'",
-        } == set(ei.value.errors)
+        assert {"Replacement value 42 is not a string."} == set(
+            ei.value.errors
+        )
 
     def test_substitutions_not_array(self):
         """
@@ -259,6 +248,6 @@ class TestValidateConfigSubstitutions:
             load_and_validate_config(cfg)
 
         assert {
-            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions is of "
-            "wrong type: {} is not of type 'array'"
+            "tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions must "
+            "be an array."
         } == set(ei.value.errors)

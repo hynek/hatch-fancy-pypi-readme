@@ -5,14 +5,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
-
-import jsonschema
+from typing import Any, cast
 
 from ._fragments import VALID_FRAGMENTS, Fragment
-from ._humanize_validation_errors import errors_to_human_strings
 from ._substitutions import Substituter
-from ._validators import CustomValidator
 from .exceptions import ConfigurationError
 
 
@@ -23,91 +19,72 @@ class Config:
     substitutions: list[Substituter]
 
 
-SCHEMA = {
-    "$schema": CustomValidator.META_SCHEMA["$id"],
-    "type": "object",
-    "properties": {
-        "content-type": {
-            "type": "string",
-            "enum": ["text/markdown", "text/x-rst"],
-        },
-        "fragments": {
-            "type": "array",
-            "minItems": 1,
-            # Items are validated separately for better error messages.
-            "items": {"type": "object"},
-        },
-        "substitutions": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "pattern": {"type": "string", "regex": True},
-                    "replacement": {"type": "string"},
-                    "ignore-case": {"type": "boolean"},
-                },
-                "required": ["pattern", "replacement"],
-                "additionalProperties": False,
-            },
-        },
-    },
-    "required": ["content-type", "fragments"],
-    "additionalProperties": False,
-}
+_BASE = "tool.hatch.metadata.hooks.fancy-pypi-readme."
 
 
 def load_and_validate_config(config: dict[str, Any]) -> Config:
-    errs = sorted(
-        CustomValidator(SCHEMA).iter_errors(config),
-        key=jsonschema.exceptions.relevance,
-    )
+    errs = []
+
+    ct = config.get("content-type")
+    if ct is None:
+        errs.append(f"{_BASE}content-type is missing.")
+    elif ct not in ("text/markdown", "text/x-rst"):
+        errs.append(
+            f"{_BASE}content-type: '{ct}' is not one of "
+            "['text/markdown', 'text/x-rst']"
+        )
+
+    try:
+        fragments = _load_fragments(config.get("fragments"))
+    except ConfigurationError as e:
+        errs.extend(e.errors)
+
+    try:
+        subs_cfg = config.get("substitutions", [])
+        if not isinstance(subs_cfg, list):
+            raise ConfigurationError(
+                [f"{_BASE}substitutions must be an array."]
+            )
+
+        substitutions = [
+            Substituter.from_config(sub_cfg) for sub_cfg in subs_cfg
+        ]
+    except ConfigurationError as e:
+        errs.extend(e.errors)
+
     if errs:
-        raise ConfigurationError(errors_to_human_strings(errs))
+        raise ConfigurationError(errs)
 
     return Config(
-        config["content-type"],
-        _load_fragments(config["fragments"]),
-        [
-            Substituter.from_config(sub_cfg)
-            for sub_cfg in config.get("substitutions", [])
-        ],
+        content_type=cast(str, ct),
+        fragments=fragments,
+        substitutions=substitutions,
     )
 
 
-def _load_fragments(config: list[dict[str, str]]) -> list[Fragment]:
+def _load_fragments(config: list[dict[str, str]] | None) -> list[Fragment]:
     """
     Load fragments from *config*.
-
-    This is a bit more complicated because validating the fragments field using
-    `oneOf` leads to unhelpful error messages that are difficult to convert
-    into something humanly meaningful.
-
-    So we detect first, validate using jsonschema and try to load them. They
-    still may fail loading if they refer to files and lack markers / the
-    pattern doesn't match.
     """
+    if config is None:
+        raise ConfigurationError([f"{_BASE}fragments is missing."])
+    if not config:
+        raise ConfigurationError([f"{_BASE}fragments must not be empty."])
+
     frags = []
     errs = []
 
-    for i, frag_cfg in enumerate(config):
+    for frag_cfg in config:
         for frag in VALID_FRAGMENTS:
             if frag.key not in frag_cfg:
                 continue
 
             try:
-                ves = sorted(
-                    frag.validator.iter_errors(frag_cfg),
-                    key=jsonschema.exceptions.relevance,
-                )
-                if ves:
-                    raise ConfigurationError(
-                        errors_to_human_strings(ves, ("fragments", i))
-                    )
                 frags.append(frag.from_config(frag_cfg))
             except ConfigurationError as e:
                 errs.extend(e.errors)
 
-            # We have either detecte and added or detected and errored, but in
+            # We have either detected and added or detected and errored, but in
             # any case we're done with this fragment.
             break
         else:

@@ -11,47 +11,17 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, Iterable
 
-from jsonschema import Validator
-
 
 if sys.version_info >= (3, 8):
     from typing import Protocol
 else:
     from typing_extensions import Protocol
 
-from ._validators import CustomValidator
 from .exceptions import ConfigurationError
-
-
-TEXT_V = CustomValidator(
-    {
-        "$schema": CustomValidator.META_SCHEMA["$id"],
-        "type": "object",
-        "properties": {"text": {"type": "string", "minLength": 1}},
-        "required": ["text"],
-        "additionalProperties": False,
-    }
-)
-
-FILE_V = CustomValidator(
-    {
-        "$schema": CustomValidator.META_SCHEMA["$id"],
-        "type": "object",
-        "properties": {
-            "path": {"type": "string", "minLength": 1},
-            "start-after": {"type": "string", "minLength": 1},
-            "end-before": {"type": "string", "minLength": 1},
-            "pattern": {"type": "string", "regex": True},
-        },
-        "required": ["path"],
-        "additionalProperties": False,
-    }
-)
 
 
 class Fragment(Protocol):
     key: ClassVar[str]
-    validator: ClassVar[Validator]
 
     @classmethod
     def from_config(self, cfg: dict[str, str]) -> Fragment:
@@ -68,13 +38,16 @@ class TextFragment:
     """
 
     key: ClassVar[str] = "text"
-    validator: ClassVar[Validator] = TEXT_V
 
     _text: str
 
     @classmethod
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        return cls(cfg[cls.key])
+        text = cfg[cls.key]
+        if not text:
+            raise ConfigurationError(["Text fragments must not be empty."])
+
+        return cls(text)
 
     def render(self) -> str:
         return self._text
@@ -87,7 +60,6 @@ class FileFragment:
     """
 
     key: ClassVar[str] = "path"
-    validator: ClassVar[Validator] = FILE_V
 
     _contents: str
 
