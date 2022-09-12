@@ -10,7 +10,7 @@ description = "Fancy PyPI READMEs with Hatch"
 requires-python = ">=3.7"
 keywords = ["hatch", "pypi", "readme", "documentation"]
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
-license = {text = "MIT"}
+license = { text = "MIT" }
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Hatch",
@@ -36,15 +36,12 @@ dependencies = [
 [project.entry-points.hatch]
 fancy-pypi-readme = "hatch_fancy_pypi_readme.hooks"
 
-
 [project.scripts]
 hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
-
 
 [project.optional-dependencies]
 tests = ["pytest", "build", "wheel"]
 dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
-
 
 [project.urls]
 Documentation = "https://github.com/hynek/hatch-fancy-pypi-readme#readme"
@@ -77,6 +74,7 @@ xfail_strict = true
 testpaths = "tests"
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
 filterwarnings = ["once::Warning"]
+
 
 [tool.coverage.run]
 parallel = true
@@ -124,13 +122,12 @@ profile = "attrs"
 
 
 [tool.mypy]
-show_error_codes = true
-enable_error_code = ["ignore-without-code"]
 strict = true
 follow_imports = "normal"
+enable_error_code = ["ignore-without-code"]
+show_error_codes = true
 warn_no_return = true
 ignore_missing_imports = true
-
 
 [[tool.mypy.overrides]]
 module = "tests.*"
