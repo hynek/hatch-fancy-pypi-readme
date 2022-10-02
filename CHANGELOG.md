@@ -15,7 +15,7 @@ The **third number** is for emergencies when we need to start branches for older
 
 ### Added
 
-- `start-at` in addition to `start-after`. This often removes the need for adding markers, because you can define the starting point using a heading that becomes part of the fragment.
+- Added `start-at` in addition to `start-after` that preserves the string that is looked for. This often removes the need for adding markers because you can define the starting point using a heading that becomes part of the fragment.
 
    For example: `start-at = "## License"` gives you `## License` and everything that follows.
    [#71](https://github.com/hynek/hatch-fancy-pypi-readme/issues/71)
