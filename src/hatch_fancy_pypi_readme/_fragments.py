@@ -67,6 +67,7 @@ class FileFragment:
     def from_config(cls, cfg: dict[str, str]) -> Fragment:
         path = Path(cfg.pop(cls.key))
         start_after = cfg.pop("start-after", None)
+        start_at = cfg.pop("start-at", None)
         end_before = cfg.pop("end-before", None)
         pattern = cfg.pop("pattern", None)
 
@@ -77,6 +78,14 @@ class FileFragment:
         except FileNotFoundError:
             raise ConfigurationError([f"Fragment file '{path}' not found."])
 
+        if start_after and start_at:
+            raise ConfigurationError(
+                [
+                    "file fragment: 'start-after' and 'start-at' are "
+                    "mutually exclusive."
+                ]
+            )
+
         if start_after is not None:
             try:
                 _, contents = contents.split(start_after, 1)
@@ -84,6 +93,13 @@ class FileFragment:
                 errs.append(
                     f"file fragment: 'start-after' {start_after!r} not found."
                 )
+        elif start_at is not None:
+            p = contents.find(start_at)
+            if p == -1:
+                errs.append(
+                    f"file fragment: 'start-at' {start_at!r} not found."
+                )
+            contents = contents[p:]
 
         if end_before is not None:
             try:

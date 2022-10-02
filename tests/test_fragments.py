@@ -63,6 +63,26 @@ Uninteresting Footer
             ).render()
         )
 
+    def test_start_at_ok(self, txt_path):
+        """
+        Specifying a `start-at` that exists in the file removes everything
+        before the string, but not the string itself.
+        """
+        assert (
+            """This is the *interesting* body!
+
+<!-- but before this -->
+
+Uninteresting Footer
+"""
+            == FileFragment.from_config(
+                {
+                    "path": str(txt_path),
+                    "start-at": "This is the *interesting* body!",
+                }
+            ).render()
+        )
+
     def test_end_before_ok(self, txt_path):
         """
         Specifying an `end-before` that exists in the file cuts it off along
@@ -115,6 +135,43 @@ This is the *interesting* body!"""
         assert [
             "file fragment: 'start-after' 'nope' not found.",
             "file fragment: 'end-before' 'also nope' not found.",
+        ] == ei.value.errors
+
+    def test_start_at_end_before_not_found(self, txt_path):
+        """
+        If `start-at` and/or `end-before` don't exist, a helpful error is
+        raised.
+        """
+        with pytest.raises(ConfigurationError) as ei:
+            FileFragment.from_config(
+                {
+                    "path": str(txt_path),
+                    "start-at": "nope",
+                    "end-before": "also nope",
+                }
+            )
+
+        assert [
+            "file fragment: 'start-at' 'nope' not found.",
+            "file fragment: 'end-before' 'also nope' not found.",
+        ] == ei.value.errors
+
+    def test_start_after_at(self, txt_path):
+        """
+        If both `start-after` and `start-at` are passed, abort with an error.
+        """
+        with pytest.raises(ConfigurationError) as ei:
+            FileFragment.from_config(
+                {
+                    "path": str(txt_path),
+                    "start-after": "cut",
+                    "start-at": "cut",
+                }
+            )
+
+        assert [
+            "file fragment: 'start-after' and 'start-at' are mutually "
+            "exclusive."
         ] == ei.value.errors
 
     def test_pattern_no_match(self, txt_path):
