@@ -27,6 +27,7 @@ You’ve come to the right place!
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
+- [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
 - And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static readme to avoid a circular dependency that can be problematic in some cases.
   The shoemaker’s kids always go barefoot.
 
@@ -120,7 +121,11 @@ path = "AUTHORS.md"
 
 Additionally it’s possible to cut away parts of the file before appending it:
 
-- **`start-after`** cuts away everything before the string specified.
+- **`start-after`** cuts away everything *before and including* the string specified.
+- **`start-at`** cuts away everything before the string specified – the string itself is preserved.
+  This is useful when you want to start at a heading without adding a marker *before* it.
+
+  `start-after` and `start-at` are mutually exclusive.
 - **`end-before`** cuts away everything after.
 - **`pattern`** takes a [*regular expression*](https://docs.python.org/3/library/re.html) and returns the first group from it (you probably want to make your capture group non-greedy by appending a question mark: `(.*?)`).
   Internally, it uses
