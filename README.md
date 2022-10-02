@@ -33,7 +33,7 @@ You’ve come to the right place!
 
 <!-- start docs -->
 
-Feel free to [open a PR](https://github.com/hynek/hatch-fancy-pypi-readme/edit/main/README.md) to add *your* ✨fancy✨ project!
+Please [open a pull request](https://github.com/hynek/hatch-fancy-pypi-readme/edit/main/README.md) to add *your* ✨fancy✨ project!
 
 
 ## Motivation
@@ -122,7 +122,7 @@ path = "AUTHORS.md"
 Additionally it’s possible to cut away parts of the file before appending it:
 
 - **`start-after`** cuts away everything *before and including* the string specified.
-- **`start-at`** cuts away everything before the string specified – the string itself is preserved.
+- **`start-at`** cuts away everything before the string specified too, but the string itself is *preserved*.
   This is useful when you want to start at a heading without adding a marker *before* it.
 
   `start-after` and `start-at` are mutually exclusive.
@@ -174,7 +174,7 @@ to your readme.
 > - The order of the options in a fragment block does *not* matter.
 >   They’re always executed in the same order:
 >
->   1. `start-after`
+>   1. `start-after` / `start-at`
 >   2. `end-before`
 >   3. `pattern`
 
