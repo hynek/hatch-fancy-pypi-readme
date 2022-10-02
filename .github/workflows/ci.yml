@@ -18,13 +18,14 @@ env:
 
 jobs:
   tests:
-    name: tox on ${{ matrix.python-version }}
-    runs-on: ubuntu-latest
+    name: tox on ${{ matrix.os }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11.0-beta - 3.11"]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "~3.11.0-0"]
+        os: [ubuntu-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -32,11 +33,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: |
-          python -VV
-          python -m site
-          python -m pip install --upgrade virtualenv tox tox-gh-actions
+      - run: python -m pip install --upgrade tox tox-gh-actions
 
       - run: python -m tox
 
@@ -46,6 +43,7 @@ jobs:
           name: coverage-data
           path: .coverage.*
           if-no-files-found: ignore
+        if: runner.os == 'Linux'
 
   coverage:
     runs-on: ubuntu-latest
@@ -101,3 +99,20 @@ jobs:
       - run: python -c 'import hatch_fancy_pypi_readme'
       - run: python -m hatch_fancy_pypi_readme tests/example_pyproject.toml
       - run: hatch-fancy-pypi-readme tests/example_pyproject.toml
+
+  # Ensure everything required is passing for branch protection.
+  required-checks-pass:
+    if: always()
+
+    needs:
+      - coverage
+      - install-dev
+      - package
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
