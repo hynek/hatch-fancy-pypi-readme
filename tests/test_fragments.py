@@ -137,6 +137,25 @@ This is the *interesting* body!"""
             "file fragment: 'end-before' 'also nope' not found.",
         ] == ei.value.errors
 
+    def test_start_at_end_before_not_found(self, txt_path):
+        """
+        If `start-at` and/or `end-before` don't exist, a helpful error is
+        raised.
+        """
+        with pytest.raises(ConfigurationError) as ei:
+            FileFragment.from_config(
+                {
+                    "path": str(txt_path),
+                    "start-at": "nope",
+                    "end-before": "also nope",
+                }
+            )
+
+        assert [
+            "file fragment: 'start-at' 'nope' not found.",
+            "file fragment: 'end-before' 'also nope' not found.",
+        ] == ei.value.errors
+
     def test_start_after_at(self, txt_path):
         """
         If both `start-after` and `start-at` are passed, abort with an error.
