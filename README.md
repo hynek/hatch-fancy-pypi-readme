@@ -30,6 +30,7 @@ You’ve come to the right place!
 - [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
+- [*structlog*](https://pypi.org/project/structlog/) ([`pyproject.toml`](https://github.com/hynek/structlog/blob/main/pyproject.toml))
 - And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static readme to avoid a circular dependency that can be problematic in some cases.
   The shoemaker’s kids always go barefoot.
 
