@@ -261,11 +261,12 @@ with our [example configuration][example-config], you will get the following out
 ## Project Links
 
 - **License**: [MIT](LICENSE.txt)
-- **Documentation**:  https://github.com/hynek/hatch-fancy-pypi-readme#readme
-- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
-- **PyPI**: https://pypi.org/project/hatch-fancy-pypi-readme/
-- **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
 - **Supported Python Versions**: 3.7 and later (follows [*Hatch*])
+- [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
+- [**Changelog**](CHANGELOG.md)
+- [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
+- [**Source Code**](https://github.com/hynek/hatch-fancy-pypi-readme)
+
 
 [example-config]: tests/example_pyproject.toml
 [*Hatch*]: https://hatch.pypa.io/
