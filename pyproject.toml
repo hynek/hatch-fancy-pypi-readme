@@ -82,7 +82,7 @@ branch = true
 source = ["hatch_fancy_pypi_readme"]
 
 [tool.coverage.paths]
-source = ["src", ".tox/*/site-packages"]
+source = ["src", ".tox/py*/**/site-packages"]
 
 [tool.coverage.report]
 show_missing = true
