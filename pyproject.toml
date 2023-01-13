@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hatch-fancy-pypi-readme"
-version = "22.8.0"
+version = "23.1.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
 requires-python = ">=3.7"
 keywords = ["hatch", "pypi", "readme", "documentation"]
@@ -82,7 +82,7 @@ branch = true
 source = ["hatch_fancy_pypi_readme"]
 
 [tool.coverage.paths]
-source = ["src", ".tox/*/site-packages"]
+source = ["src", ".tox/py*/**/site-packages"]
 
 [tool.coverage.report]
 show_missing = true

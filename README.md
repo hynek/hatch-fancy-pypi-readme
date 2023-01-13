@@ -5,7 +5,7 @@
 [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
 
-*hatch-fancy-pypi-readme* is a [*Hatch*] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
+*hatch-fancy-pypi-readme* is a [Hatch] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
@@ -28,8 +28,10 @@ You’ve come to the right place!
 - [*doc2dash*](https://pypi.org/project/doc2dash/) ([`pyproject.toml`](https://github.com/hynek/doc2dash/blob/main/pyproject.toml))
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
+- [*httpx*](https://pypi.org/project/httpx/) ([`pyproject.toml`](https://github.com/encode/httpx/blob/master/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
+- [*structlog*](https://pypi.org/project/structlog/) ([`pyproject.toml`](https://github.com/hynek/structlog/blob/main/pyproject.toml))
 - [*Twisted*](https://pypi.org/project/twisted/) ([`pyproject.toml`](https://github.com/twisted/twisted/blob/trunk/pyproject.toml))
 - And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static readme to avoid a circular dependency that can be problematic in some cases.
   The shoemaker’s kids always go barefoot.
@@ -46,13 +48,13 @@ The main reason for my (past) hesitancy to move away from `setup.py` files is th
 For example [this](https://github.com/python-attrs/attrs/blob/b3dfebe2e10b44437c4f97d788fb5220d790efd0/setup.py#L110-L124) is the code that gave me the PyPI readme for [*attrs* 22.1.0](https://pypi.org/project/attrs/22.1.0/).
 Especially having a summary of the *latest* changes is something I’ve found users to appreciate.
 
-[*Hatch*]’s extensibility finally allowed me to build this plugin that allows you to switch away from `setup.py` without compromising on the user experience.
+[Hatch]’s extensibility finally allowed me to build this plugin that allows you to switch away from `setup.py` without compromising on the user experience.
 Now *you* too can have fancy PyPI readmes – just by adding a few lines of configuration to your `pyproject.toml`.
 
 
 ## Configuration
 
-*hatch-fancy-pypi-readme* is, like [*Hatch*], configured in your project’s `pyproject.toml`.
+*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`.
 
 First you add *hatch-fancy-pypi-readme* to your `[build-system]`:
 
@@ -89,7 +91,7 @@ content-type = "text/markdown"
 Finally, you also **must** supply an *array* of `fragments`.
 A fragment is a piece of text that is appended to your readme in the order that it’s specified.
 
-We recommend *TOML*’s [syntactic sugar for arrays of wrapping the array name in double brackets](https://toml.io/en/v1.0.0#array-of-tables) and will use it throughout this documentation.
+We recommend TOML’s [syntactic sugar for arrays of wrapping the array name in double brackets](https://toml.io/en/v1.0.0#array-of-tables) and will use it throughout this documentation.
 
 
 #### Text
@@ -139,7 +141,7 @@ Additionally it’s possible to cut away parts of the file before appending it:
 
   to find it.
 
-Both *Markdown* and *reST* have comments (`<!-- this is a Markdown comment -->` and `.. this is a reST comment`) that you can use for invisible markers:
+Both Markdown and *reST* have comments (`<!-- this is a Markdown comment -->` and `.. this is a reST comment`) that you can use for invisible markers:
 
 ```markdown
 # Boring Header
@@ -249,7 +251,7 @@ with our [example configuration][example-config], you will get the following out
 ![rich-cli output](rich-cli-out.svg)
 
 > **Warning**
-> While the execution model is somewhat different from the [*Hatch*]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
+> While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
 > It will **not** help you debug **packaging issues**, though.
 >
@@ -260,11 +262,12 @@ with our [example configuration][example-config], you will get the following out
 ## Project Links
 
 - **License**: [MIT](LICENSE.txt)
-- **Documentation**:  https://github.com/hynek/hatch-fancy-pypi-readme#readme
-- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
-- **PyPI**: https://pypi.org/project/hatch-fancy-pypi-readme/
-- **Source Code**: https://github.com/hynek/hatch-fancy-pypi-readme
-- **Supported Python Versions**: 3.7 and later (follows [*Hatch*])
+- **Supported Python Versions**: 3.7 and later (follows [Hatch])
+- [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
+- [**Changelog**](CHANGELOG.md)
+- [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
+- [**Source Code**](https://github.com/hynek/hatch-fancy-pypi-readme)
+
 
 [example-config]: tests/example_pyproject.toml
-[*Hatch*]: https://hatch.pypa.io/
+[Hatch]: https://hatch.pypa.io/
