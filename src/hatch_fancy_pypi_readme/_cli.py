@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import sys
 
+from contextlib import suppress
 from typing import Any, NoReturn, TextIO
 
 from hatch_fancy_pypi_readme.exceptions import ConfigurationError
@@ -19,10 +20,8 @@ def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
     Best-effort verify config and print resulting PyPI readme.
     """
     is_dynamic = False
-    try:
+    with suppress(KeyError):
         is_dynamic = "readme" in pyproject["project"]["dynamic"]
-    except KeyError:
-        pass
 
     if not is_dynamic:
         _fail("You must add 'readme' to 'project.dynamic'.")

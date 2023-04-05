@@ -42,10 +42,7 @@ def main() -> None:
         cfg = tomllib.load(fp)
 
     out: TextIO
-    if args.o:
-        out = open(args.o, "w")
-    else:
-        out = sys.stdout
+    out = open(args.o, "w") if args.o else sys.stdout  # noqa: SIM115
 
     with closing(out):
         cli_run(cfg, out)
