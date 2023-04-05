@@ -24,7 +24,7 @@ class Fragment(Protocol):
     key: ClassVar[str]
 
     @classmethod
-    def from_config(self, cfg: dict[str, str]) -> Fragment:
+    def from_config(cls, cfg: dict[str, str]) -> Fragment:
         ...
 
     def render(self) -> str:
@@ -76,7 +76,9 @@ class FileFragment:
         try:
             contents = path.read_text(encoding="utf-8")
         except FileNotFoundError:
-            raise ConfigurationError([f"Fragment file '{path}' not found."])
+            raise ConfigurationError(
+                [f"Fragment file '{path}' not found."]
+            ) from None
 
         if start_after and start_at:
             raise ConfigurationError(

@@ -35,15 +35,15 @@ class TestSubstituter:
         https://github.com/twisted/twisted/blob/eda9d29dc7fe34e7b207781e5674dc92f798bffe/setup.py#L19-L24
         """
         assert (
-            "For information on changes in this release, see the `NEWS <https://github.com/twisted/twisted/blob/trunk/NEWS.rst>`_ file."  # noqa
+            "For information on changes in this release, see the `NEWS <https://github.com/twisted/twisted/blob/trunk/NEWS.rst>`_ file."
         ) == Substituter.from_config(
             {
                 "pattern": r"`([^`]+)\s+<(?!https?://)([^>]+)>`_",
-                "replacement": r"`\1 <https://github.com/twisted/twisted/blob/trunk/\2>`_",  # noqa
+                "replacement": r"`\1 <https://github.com/twisted/twisted/blob/trunk/\2>`_",
                 "ignore-case": True,
             }
         ).substitute(
-            "For information on changes in this release, see the `NEWS <NEWS.rst>`_ file."  # noqa
+            "For information on changes in this release, see the `NEWS <NEWS.rst>`_ file."
         )
 
     @pytest.mark.parametrize(
