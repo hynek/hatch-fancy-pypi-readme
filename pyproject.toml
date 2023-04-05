@@ -155,13 +155,15 @@ select = [
 ]
 
 ignore = [
-  "E501",    # leave line-length enforcement to Black
-  "S101",    # assert
-  "SIM300",  # Yoda rocks in tests
-  "SIM102",  # sometimes nested ifs are cleaner
-  "PLC1901", # empty strings are falsey, but are less specific in tests
+  "E501", # leave line-length enforcement to Black
 ]
 
+[tool.ruff.per-file-ignores]
+"tests/*" = [
+  "S101",    # assert
+  "SIM300",  # Yoda rocks in tests
+  "PLC1901", # empty strings are falsey, but are less specific in tests
+]
 
 [tool.ruff.isort]
 lines-between-types = 1
