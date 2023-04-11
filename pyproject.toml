@@ -45,7 +45,6 @@ Documentation = "https://github.com/hynek/hatch-fancy-pypi-readme#readme"
 Changelog = "https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/CHANGELOG.md"
 "Source Code" = "https://github.com/hynek/hatch-fancy-pypi-readme"
 Funding = "https://github.com/sponsors/hynek"
-Ko-fi = "https://ko-fi.com/the_hynek"
 
 [project.readme]
 content-type = "text/markdown"
