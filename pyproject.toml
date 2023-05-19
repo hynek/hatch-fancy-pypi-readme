@@ -50,7 +50,7 @@ Funding = "https://github.com/sponsors/hynek"
 content-type = "text/markdown"
 text = """# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme!
 
-*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [*Hatch*](https://hatch.pypa.io/) by [Hynek Schlawack](https://hynek.me/).
+*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [Hatch](https://hatch.pypa.io/) by [Hynek Schlawack](https://hynek.me/).
 
 Its purpose is to help you to have fancy PyPI readmes – unlike *this* one you’re looking at right now.
 
