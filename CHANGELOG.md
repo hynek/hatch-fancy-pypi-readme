@@ -12,6 +12,12 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.8.0...HEAD)
 
+### Added
+
+- CLI support for `hatch.toml`.
+  [#27](https://github.com/hynek/hatch-fancy-pypi-readme/issues/27)
+
+
 ## [22.8.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.7.0...22.8.0) - 2022-10-02
 
 ### Added
