@@ -48,15 +48,9 @@ Funding = "https://github.com/sponsors/hynek"
 
 [project.readme]
 content-type = "text/markdown"
-text = """# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme! 🧐
+text = """# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme!
 
-[![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
-[![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
-[![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
-
-
-*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [*Hatch*](https://hatch.pypa.io/).
+*hatch-fancy-pypi-readme* is an MIT-licensed metadata plugin for [*Hatch*](https://hatch.pypa.io/) by [Hynek Schlawack](https://hynek.me/).
 
 Its purpose is to help you to have fancy PyPI readmes – unlike *this* one you’re looking at right now.
 
