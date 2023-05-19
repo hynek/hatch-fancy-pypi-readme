@@ -15,7 +15,9 @@ from ._builder import build_text
 from ._config import load_and_validate_config
 
 
-def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
+def cli_run(
+    pyproject: dict[str, Any], hatch_toml: dict[str, Any], out: TextIO
+) -> None:
     """
     Best-effort verify config and print resulting PyPI readme.
     """
@@ -27,14 +29,33 @@ def cli_run(pyproject: dict[str, Any], out: TextIO) -> None:
         _fail("You must add 'readme' to 'project.dynamic'.")
 
     try:
-        cfg = pyproject["tool"]["hatch"]["metadata"]["hooks"][
-            "fancy-pypi-readme"
-        ]
+        if (
+            pyproject["tool"]["hatch"]["metadata"]["hooks"][
+                "fancy-pypi-readme"
+            ]
+            and hatch_toml["metadata"]["hooks"]["fancy-pypi-readme"]
+        ):
+            _fail(
+                "Both pyproject.toml and hatch.toml contain "
+                "hatch-fancy-pypi-readme configuration."
+            )
     except KeyError:
-        _fail(
-            "Missing configuration "
-            "(`[tool.hatch.metadata.hooks.fancy-pypi-readme]`)",
-        )
+        pass
+
+    try:
+        cfg = hatch_toml["metadata"]["hooks"]["fancy-pypi-readme"]
+    except KeyError:
+        try:
+            cfg = pyproject["tool"]["hatch"]["metadata"]["hooks"][
+                "fancy-pypi-readme"
+            ]
+        except KeyError:
+            _fail(
+                "Missing configuration "
+                "(`[tool.hatch.metadata.hooks.fancy-pypi-readme]` in"
+                " pyproject.toml or `[metadata.hooks.fancy-pypi-readme]`"
+                " in hatch.toml)",
+            )
 
     try:
         config = load_and_validate_config(cfg)

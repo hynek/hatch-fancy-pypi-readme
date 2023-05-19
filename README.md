@@ -57,7 +57,11 @@ Now *you* too can have fancy PyPI readmes – just by adding a few lines of conf
 
 ## Configuration
 
-*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`.
+*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`[^hatch-toml].
+
+[^hatch-toml]: As with Hatch, you can also use `hatch.toml` for configuration options that start with `tool.hatch` and leave that prefix out.
+  That means `pyprojects.toml`’s `[tool.hatch.metadata.hooks.fancy-pypi-readme]` becomes `[metadata.hooks.fancy-pypi-readme]` when in `hatch.toml`.
+  To keep the documentation simple, the more common `pyproject.toml` syntax is used throughout.
 
 First you add *hatch-fancy-pypi-readme* to your `[build-system]`:
 
@@ -254,14 +258,11 @@ with our [example configuration][example-config], you will get the following out
 ![rich-cli output](rich-cli-out.svg)
 
 > **Warning**
+> While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
-> - The **CLI** currently doesn’t support `hatch.toml`.
->   The **plugin** itself does.
-> - While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
+> It will **not** help you debug **packaging issues**, though.
 >
->   It will **not** help you debug **packaging issues**, though.
->
->   To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
+> To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
 
 
 ## Project Links
