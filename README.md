@@ -254,11 +254,14 @@ with our [example configuration][example-config], you will get the following out
 ![rich-cli output](rich-cli-out.svg)
 
 > **Warning**
-> While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
-> It will **not** help you debug **packaging issues**, though.
+> - The **CLI** currently doesn’t support `hatch.toml`.
+>   The **plugin** itself does.
+> - While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
-> To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
+>   It will **not** help you debug **packaging issues**, though.
+>
+>   To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
 
 <!-- end docs -->
 
