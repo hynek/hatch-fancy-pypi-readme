@@ -264,7 +264,6 @@ with our [example configuration][example-config], you will get the following out
 >
 > To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
 
-<!-- end docs -->
 
 ## Project Links
 
