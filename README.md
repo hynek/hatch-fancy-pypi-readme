@@ -1,4 +1,4 @@
-# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme! 🧐
+# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme!
 
 [![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
@@ -21,7 +21,7 @@ You’ve come to the right place!
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
 
-### Showcases
+### Showcases 🧐
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
 - [*Awkward Array*](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
