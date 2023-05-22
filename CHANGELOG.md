@@ -10,6 +10,9 @@ The **third number** is for emergencies when we need to start branches for older
 
 <!-- changelog follows -->
 
+
+## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/23.1.0...HEAD)
+
 ## [23.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.8.0...23.1.0) - 2023-05-22
 
 ### Added
