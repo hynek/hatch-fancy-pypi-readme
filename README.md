@@ -263,6 +263,11 @@ with our [example configuration][example-config], you will get the following out
 > It will **not** help you debug **packaging issues**, though.
 >
 > To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
+>
+> If you ensure that *hatch-fancy-pypi-readme* is installed in your Hatch environment (that means where the `hatch` CLI command lives -- not your development environment), you can also let Hatch render it for you:
+>
+- - `hatch project metadata readme` gives you a rendered version of the readme.
+> - `hatch project metadata | jq -r .readme.text` gives you the raw Markdown (needs [*jq*](https://stedolan.github.io/jq/)).
 
 
 ## Project Links
