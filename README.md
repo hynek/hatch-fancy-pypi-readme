@@ -266,7 +266,7 @@ with our [example configuration][example-config], you will get the following out
 >
 > If you ensure that *hatch-fancy-pypi-readme* is installed in your Hatch environment (that means where the `hatch` CLI command lives -- not your development environment), you can also let Hatch render it for you:
 >
-- - `hatch project metadata readme` gives you a rendered version of the readme.
+> - `hatch project metadata readme` gives you a rendered version of the readme.
 > - `hatch project metadata | jq -r .readme.text` gives you the raw Markdown (needs [*jq*](https://stedolan.github.io/jq/)).
 
 
