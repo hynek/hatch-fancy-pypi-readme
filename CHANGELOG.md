@@ -10,7 +10,16 @@ The **third number** is for emergencies when we need to start branches for older
 
 <!-- changelog follows -->
 
-## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.8.0...HEAD)
+
+## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/23.1.0...HEAD)
+
+## [23.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.8.0...23.1.0) - 2023-05-22
+
+### Added
+
+- CLI support for `hatch.toml`.
+  [#27](https://github.com/hynek/hatch-fancy-pypi-readme/issues/27)
+
 
 ## [22.8.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.7.0...22.8.0) - 2022-10-02
 
@@ -19,7 +28,7 @@ The **third number** is for emergencies when we need to start branches for older
 - Added `start-at` in addition to `start-after` that preserves the string that is looked for. This often removes the need for adding markers because you can define the starting point using a heading that becomes part of the fragment.
 
    For example: `start-at = "## License"` gives you `## License` and everything that follows.
-   [#71](https://github.com/hynek/hatch-fancy-pypi-readme/issues/71)
+   [#16](https://github.com/hynek/hatch-fancy-pypi-readme/issues/16)
 
 
 ## [22.7.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.6.0...22.7.0) - 2022-09-12

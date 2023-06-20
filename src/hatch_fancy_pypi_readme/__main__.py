@@ -8,6 +8,7 @@ import argparse
 import sys
 
 from contextlib import closing
+from pathlib import Path
 from typing import TextIO
 
 from ._cli import cli_run
@@ -21,7 +22,8 @@ else:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Render a README from a pyproject.toml"
+        description="Render a README from a pyproject.toml & hatch.toml."
+        " If a hatch.toml is passed / detected, it's preferred."
     )
     parser.add_argument(
         "pyproject_path",
@@ -32,20 +34,41 @@ def main() -> None:
         "Default: pyproject.toml in current directory.",
     )
     parser.add_argument(
+        "--hatch-toml",
+        nargs="?",
+        metavar="PATH-TO-HATCH.TOML",
+        default=None,
+        help="Path to an additional hatch.toml to use for rendering. "
+        "Default: Auto-detect in the current directory.",
+    )
+    parser.add_argument(
         "-o",
         help="Target file for output. Default: standard out.",
         metavar="TARGET-FILE-PATH",
     )
     args = parser.parse_args()
 
-    with open(args.pyproject_path, "rb") as fp:
-        cfg = tomllib.load(fp)
+    pyproject = tomllib.loads(Path(args.pyproject_path).read_text())
+    hatch_toml = _maybe_load_hatch_toml(args.hatch_toml)
 
     out: TextIO
     out = open(args.o, "w") if args.o else sys.stdout  # noqa: SIM115
 
     with closing(out):
-        cli_run(cfg, out)
+        cli_run(pyproject, hatch_toml, out)
+
+
+def _maybe_load_hatch_toml(hatch_toml_arg: str | None) -> dict[str, object]:
+    """
+    If hatch.toml is passed or detected, load it.
+    """
+    if hatch_toml_arg:
+        return tomllib.loads(Path(hatch_toml_arg).read_text())
+
+    if Path("hatch.toml").exists():
+        return tomllib.loads(Path("hatch.toml").read_text())
+
+    return {}
 
 
 if __name__ == "__main__":

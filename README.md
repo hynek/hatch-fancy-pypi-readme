@@ -1,4 +1,4 @@
-# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme! 🧐
+# Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme!
 
 [![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
@@ -21,20 +21,24 @@ You’ve come to the right place!
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
 
 
-### Showcases
+### Showcases 🧐
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
+- [*Awkward Array*](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
 - [*Black*](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
 - [*doc2dash*](https://pypi.org/project/doc2dash/) ([`pyproject.toml`](https://github.com/hynek/doc2dash/blob/main/pyproject.toml))
+- [*environ-config*](https://pypi.org/project/environ-config/) ([`pyproject.toml`](https://github.com/hynek/environ-config/blob/main/pyproject.toml))
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*httpx*](https://pypi.org/project/httpx/) ([`pyproject.toml`](https://github.com/encode/httpx/blob/master/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
+- [*scikit-build*](https://pypi.org/project/scikit-build/) ([`pyproject.toml`](https://github.com/scikit-build/scikit-build/blob/main/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
 - [*structlog*](https://pypi.org/project/structlog/) ([`pyproject.toml`](https://github.com/hynek/structlog/blob/main/pyproject.toml))
 - [*Twisted*](https://pypi.org/project/twisted/) ([`pyproject.toml`](https://github.com/twisted/twisted/blob/trunk/pyproject.toml))
-- And finally [*hatch-fancy-pypi-readme*](https://pypi.org/project/hatch-fancy-pypi-readme/22.5.0/) 22.5.0 ([`pyproject.toml`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/1a76f0d6cb78448e59466716ee3d5b5ea99915d1/pyproject.toml#L125-L168)), before we went back to a static readme to avoid a circular dependency that can be problematic in some cases.
-  The shoemaker’s kids always go barefoot.
+
+*hatch-fancy-pypi-readme* doesn’t use itself to avoid a circular dependency that can be problematic in some cases.
+The shoemaker’s kids always go barefoot.
 
 <!-- start docs -->
 
@@ -54,7 +58,11 @@ Now *you* too can have fancy PyPI readmes – just by adding a few lines of conf
 
 ## Configuration
 
-*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`.
+*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`[^hatch-toml].
+
+[^hatch-toml]: As with Hatch, you can also use `hatch.toml` for configuration options that start with `tool.hatch` and leave that prefix out.
+  That means `pyprojects.toml`’s `[tool.hatch.metadata.hooks.fancy-pypi-readme]` becomes `[metadata.hooks.fancy-pypi-readme]` when in `hatch.toml`.
+  To keep the documentation simple, the more common `pyproject.toml` syntax is used throughout.
 
 First you add *hatch-fancy-pypi-readme* to your `[build-system]`:
 
@@ -256,8 +264,12 @@ with our [example configuration][example-config], you will get the following out
 > It will **not** help you debug **packaging issues**, though.
 >
 > To verify your PyPI readme using the full packaging pipeline, check out my [*build-and-inspect-python-package*](https://github.com/hynek/build-and-inspect-python-package) GitHub Action.
+>
+> If you ensure that *hatch-fancy-pypi-readme* is installed in your Hatch environment (that means where the `hatch` CLI command lives – not your development environment), you can also let Hatch render it for you:
+>
+> - `hatch project metadata readme` gives you a rendered version of the readme.
+> - `hatch project metadata | jq -r .readme.text` gives you the raw Markdown (needs [*jq*](https://stedolan.github.io/jq/)).
 
-<!-- end docs -->
 
 ## Project Links
 
