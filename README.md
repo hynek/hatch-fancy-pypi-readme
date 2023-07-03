@@ -273,8 +273,6 @@ with our [example configuration][example-config], you will get the following out
 
 ## Project Links
 
-- **License**: [MIT](LICENSE.txt)
-- **Supported Python Versions**: 3.7 and later (follows [Hatch])
 - [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
 - [**Changelog**](CHANGELOG.md)
 - [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
