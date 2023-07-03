@@ -4,8 +4,12 @@
 
 from __future__ import annotations
 
-from ._fragments import Fragment
-from ._substitutions import Substituter
+from typing import TYPE_CHECKING
+
+
+if TYPE_CHECKING:
+    from ._fragments import Fragment
+    from ._substitutions import Substituter
 
 
 def build_text(
