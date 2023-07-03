@@ -33,38 +33,26 @@ Please report any harm to [Hynek Schlawack] in any way you find appropriate.
 
 You can (and should) run our test suite using [*tox*].
 However, you’ll probably want a more traditional environment as well.
-We highly recommend to develop using the latest Python release because we try to take advantage of modern features whenever possible.
 
-First create a [virtual environment](https://virtualenv.pypa.io/) so you don't break your system-wide Python installation.
-It’s out of scope for this document to list all the ways to manage virtual environments in Python, but if you don’t already have a pet way, take some time to look at tools like [*direnv*](https://hynek.me/til/python-project-local-venvs/), [*virtualfish*](https://virtualfish.readthedocs.io/), and [*virtualenvwrapper*](https://virtualenvwrapper.readthedocs.io/).
+We recommend using the Python version from the `.python-version-default` file in the project's root directory, because that's the one that is used in the CI by default, too.
 
-Next, get an up to date checkout of the *hatch-fancy-pypi-readme* repository:
+If you're using [*direnv*](https://direnv.net), you can automate the creation of the project virtual environment with the correct Python version by adding the following `.envrc` to the project root:
 
-```console
-$ git clone git@github.com:hynek/hatch-fancy-pypi-readme.git
+```bash
+layout python python$(cat .python-version-default)
 ```
 
-or if you want to use git via `https`:
+You can now install the package with its development dependencies into the virtual environment:
 
 ```console
-$ git clone https://github.com/hynek/hatch-fancy-pypi-readme.git
+$ pip install -e .[dev]
 ```
 
-Change into the newly created directory and **after activating your virtual environment** install an editable version of *hatch-fancy-pypi-readme* along with its tests requirements:
-
-```console
-$ cd hatch-fancy-pypi-readme
-$ pip install --upgrade pip setuptools  # PLEASE don't skip this step
-$ pip install -e '.[dev]'
-```
-
-At this point,
+Now you can run the test suite:
 
 ```console
 $ python -m pytest
 ```
-
-should work and pass.
 
 To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] and its hooks:
 
@@ -78,8 +66,8 @@ This is not strictly necessary, because our [*tox*] file contains an environment
 $ pre-commit run --all-files
 ```
 
-and our CI has integration with `pre-commit.ci <https://pre-commit.ci>`_.
-But it's way more comfortable to run it locally and *git* catching avoidable errors.
+and our CI has integration with [pre-commit.ci](https://pre-commit.ci).
+But it's way more comfortable to run it locally and Git catching avoidable errors.
 
 
 ## Code
@@ -190,6 +178,6 @@ or:
 [CI]: https://github.com/hynek/hatch-fancy-pypi-readme/actions
 [Hynek Schlawack]: https://hynek.me/about/
 [*pre-commit*]: https://pre-commit.com/
-[*tox*]: https://https://tox.wiki/
+[*tox*]: https://tox.wiki/
 [semantic newlines]: https://rhodesmill.org/brandon/2012/one-sentence-per-line/
 [*reStructuredText*]: https://www.sphinx-doc.org/en/stable/usage/restructuredtext/basics.html
