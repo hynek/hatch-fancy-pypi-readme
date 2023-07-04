@@ -15,11 +15,7 @@ if TYPE_CHECKING:
 def build_text(
     fragments: list[Fragment], substitutions: list[Substituter]
 ) -> str:
-    rv = []
-    for f in fragments:
-        rv.append(f.render())
-
-    text = "".join(rv)
+    text = "".join(f.render() for f in fragments)
 
     for sub in substitutions:
         text = sub.substitute(text)

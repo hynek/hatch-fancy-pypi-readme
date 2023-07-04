@@ -81,7 +81,7 @@ def _load_fragments(config: list[dict[str, str]] | None) -> list[Fragment]:
 
             try:
                 frags.append(frag.from_config(frag_cfg))
-            except ConfigurationError as e:
+            except ConfigurationError as e:  # noqa[PERF203]
                 errs.extend(e.errors)
 
             # We have either detected and added or detected and errored, but in
