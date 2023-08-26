@@ -4,18 +4,18 @@
 
 from __future__ import annotations
 
-from ._fragments import Fragment
-from ._substitutions import Substituter
+from typing import TYPE_CHECKING
+
+
+if TYPE_CHECKING:
+    from ._fragments import Fragment
+    from ._substitutions import Substituter
 
 
 def build_text(
     fragments: list[Fragment], substitutions: list[Substituter]
 ) -> str:
-    rv = []
-    for f in fragments:
-        rv.append(f.render())
-
-    text = "".join(rv)
+    text = "".join(f.render() for f in fragments)
 
     for sub in substitutions:
         text = sub.substitute(text)

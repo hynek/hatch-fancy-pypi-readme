@@ -47,7 +47,7 @@ class TestSubstituter:
         )
 
     @pytest.mark.parametrize(
-        "pat,repl,text,expect",
+        ("pat", "repl", "text", "expect"),
         [
             (
                 r"#(\d+)",

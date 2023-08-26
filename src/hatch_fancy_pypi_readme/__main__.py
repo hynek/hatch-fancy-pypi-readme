@@ -52,7 +52,7 @@ def main() -> None:
     hatch_toml = _maybe_load_hatch_toml(args.hatch_toml)
 
     out: TextIO
-    out = open(args.o, "w") if args.o else sys.stdout  # noqa: SIM115
+    out = Path(args.o).open("w") if args.o else sys.stdout  # noqa: SIM115
 
     with closing(out):
         cli_run(pyproject, hatch_toml, out)

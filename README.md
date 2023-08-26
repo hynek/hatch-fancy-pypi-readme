@@ -15,7 +15,7 @@ For instance to make relative links absolute or to linkify users and issue numbe
 Do you want your PyPI readme to be the project readme, but without badges, followed by the license file, and the changelog section for *only the last* release?
 You’ve come to the right place!
 
-> **Note**
+> [!NOTE]
 > “PyPI project description”, “PyPI landing page”, and “PyPI readme” all refer to the same thing.
 > In *setuptools* it’s called `long_description` and is the text shown on a project’s PyPI page.
 > We refer to it as “readme” because that’s how it’s called in [PEP 621](https://peps.python.org/pep-0621/)-based `pyproject.toml` files.
@@ -31,6 +31,8 @@ You’ve come to the right place!
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*httpx*](https://pypi.org/project/httpx/) ([`pyproject.toml`](https://github.com/encode/httpx/blob/master/pyproject.toml))
+- [*OpenLLM*](https://github.com/bentoml/OpenLLM) ([`pyproject.toml`](https://github.com/bentoml/OpenLLM/blob/main/openllm-python/pyproject.toml))
+- [*Pydantic*](https://pypi.org/project/pydantic/) ([`pyproject.toml`](https://github.com/pydantic/pydantic/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - [*scikit-build*](https://pypi.org/project/scikit-build/) ([`pyproject.toml`](https://github.com/scikit-build/scikit-build/blob/main/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
@@ -80,7 +82,7 @@ Next, you tell the build system that your readme is dynamic by adding it to the 
 dynamic = ["readme"]
 ```
 
-> **Note**:
+> [!IMPORTANT]
 > Don’t forget to remove the old `readme` key!
 
 Next, you add a `[tool.hatch.metadata.hooks.fancy-pypi-readme]` section.
@@ -181,7 +183,7 @@ would append:
 
 to your readme.
 
-> **Note**
+> [!NOTE]
 >
 > - You can insert the same file **multiple times** – each time a different part!
 > - The order of the options in a fragment block does *not* matter.
@@ -258,7 +260,7 @@ with our [example configuration][example-config], you will get the following out
 
 ![rich-cli output](rich-cli-out.svg)
 
-> **Warning**
+> [!WARNING]
 > While the execution model is somewhat different from the [Hatch]-Python packaging pipeline, it uses the same configuration validator and text renderer, so the fidelity should be high.
 >
 > It will **not** help you debug **packaging issues**, though.
@@ -273,8 +275,6 @@ with our [example configuration][example-config], you will get the following out
 
 ## Project Links
 
-- **License**: [MIT](LICENSE.txt)
-- **Supported Python Versions**: 3.7 and later (follows [Hatch])
 - [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
 - [**Changelog**](CHANGELOG.md)
 - [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
