@@ -222,7 +222,7 @@ Or expanding GitHub issue/pull request IDs to links:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-# Regular TOML strings (double quotes) do.
+# Regular TOML strings (double quotes) do need escaping.
 pattern = "#(\\d+)"
 replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\1)"
 ```
