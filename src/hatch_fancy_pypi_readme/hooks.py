@@ -29,6 +29,6 @@ class FancyReadmeMetadataHook(MetadataHookInterface):
         }
 
 
-@hookimpl  # type: ignore[misc]
+@hookimpl
 def hatch_register_metadata_hook() -> type[MetadataHookInterface]:
     return FancyReadmeMetadataHook
