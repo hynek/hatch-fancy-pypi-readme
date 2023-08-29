@@ -37,6 +37,7 @@ You’ve come to the right place!
 - [*scikit-build*](https://pypi.org/project/scikit-build/) ([`pyproject.toml`](https://github.com/scikit-build/scikit-build/blob/main/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
 - [*structlog*](https://pypi.org/project/structlog/) ([`pyproject.toml`](https://github.com/hynek/structlog/blob/main/pyproject.toml))
+- [*Twisted*](https://pypi.org/project/twisted/) ([`pyproject.toml`](https://github.com/twisted/twisted/blob/trunk/pyproject.toml))
 
 *hatch-fancy-pypi-readme* doesn’t use itself to avoid a circular dependency that can be problematic in some cases.
 The shoemaker’s kids always go barefoot.
