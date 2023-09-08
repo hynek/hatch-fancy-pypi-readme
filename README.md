@@ -278,7 +278,7 @@ with our [example configuration][example-config], you will get the following out
 - [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
 - [**Changelog**](CHANGELOG.md)
 - [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
-- [**Source Code**](https://github.com/hynek/hatch-fancy-pypi-readme)
+- [**GitHub**](https://github.com/hynek/hatch-fancy-pypi-readme)
 
 
 [example-config]: tests/example_pyproject.toml
