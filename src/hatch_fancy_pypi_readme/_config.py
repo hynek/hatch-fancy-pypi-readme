@@ -19,23 +19,25 @@ class Config:
     substitutions: list[Substituter]
 
 
-_BASE = "tool.hatch.metadata.hooks.fancy-pypi-readme."
+_DEFAULT_BASE = "tool.hatch.metadata.hooks.fancy-pypi-readme."
 
 
-def load_and_validate_config(config: dict[str, Any]) -> Config:
+def load_and_validate_config(
+    config: dict[str, Any], base: str = _DEFAULT_BASE
+) -> Config:
     errs = []
 
     ct = config.get("content-type")
     if ct is None:
-        errs.append(f"{_BASE}content-type is missing.")
+        errs.append(f"{base}content-type is missing.")
     elif ct not in ("text/markdown", "text/x-rst"):
         errs.append(
-            f"{_BASE}content-type: '{ct}' is not one of "
+            f"{base}content-type: '{ct}' is not one of "
             "['text/markdown', 'text/x-rst']"
         )
 
     try:
-        fragments = _load_fragments(config.get("fragments"))
+        fragments = _load_fragments(config.get("fragments"), base=base)
     except ConfigurationError as e:
         errs.extend(e.errors)
 
@@ -43,7 +45,7 @@ def load_and_validate_config(config: dict[str, Any]) -> Config:
         subs_cfg = config.get("substitutions", [])
         if not isinstance(subs_cfg, list):
             raise ConfigurationError(
-                [f"{_BASE}substitutions must be an array."]
+                [f"{base}substitutions must be an array."]
             )
 
         substitutions = [
@@ -62,14 +64,16 @@ def load_and_validate_config(config: dict[str, Any]) -> Config:
     )
 
 
-def _load_fragments(config: list[dict[str, str]] | None) -> list[Fragment]:
+def _load_fragments(
+    config: list[dict[str, str]] | None, base: str = _DEFAULT_BASE
+) -> list[Fragment]:
     """
     Load fragments from *config*.
     """
     if config is None:
-        raise ConfigurationError([f"{_BASE}fragments is missing."])
+        raise ConfigurationError([f"{base}fragments is missing."])
     if not config:
-        raise ConfigurationError([f"{_BASE}fragments must not be empty."])
+        raise ConfigurationError([f"{base}fragments must not be empty."])
 
     frags = []
     errs = []

@@ -38,13 +38,16 @@ def _plugin_dir():
 class BuildSystem(NamedTuple):
     dist: str
     backend: str
+    config_prefix: str
 
 
 @pytest.fixture(
     name="build_system",
     params=[
-        BuildSystem("hatchling", "hatchling.build"),
-        BuildSystem("pdm-backend", "pdm.backend"),
+        BuildSystem(
+            "hatchling", "hatchling.build", "tool.hatch.metadata.hooks"
+        ),
+        BuildSystem("pdm-backend", "pdm.backend", "tool.pdm.build.hooks"),
     ],
     ids=lambda build_system: build_system.dist,
 )

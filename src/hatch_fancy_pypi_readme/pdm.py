@@ -15,9 +15,7 @@ if TYPE_CHECKING:
 
 
 class FancyReadmeHook:
-    # Should be under "tool.pdm.build.hooks.fancy-pypi-readme" when
-    # running under pdm-backend?
-    CONFIG_KEY = "tool.hatch.metadata.hooks.fancy-pypi-readme"
+    CONFIG_KEY = "tool.pdm.build.hooks.fancy-pypi-readme"
 
     def pdm_build_hook_enabled(self, context: Context) -> bool:
         metadata = context.config.metadata
@@ -27,7 +25,9 @@ class FancyReadmeHook:
 
     def pdm_build_initialize(self, context: Context) -> None:
         metadata = context.config.metadata
-        config = load_and_validate_config(self._get_config(context))
+        config = load_and_validate_config(
+            self._get_config(context), base=f"{self.CONFIG_KEY}."
+        )
 
         metadata.get("dynamic", []).remove("readme")
         metadata["readme"] = {

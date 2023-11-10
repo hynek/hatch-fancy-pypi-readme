@@ -37,9 +37,7 @@ def _pyproject_data(dynamic_metadata, readme_config):
             "dynamic": dynamic_metadata,
         },
         "tool": {
-            "hatch": {
-                "metadata": {"hooks": {"fancy-pypi-readme": readme_config}}
-            }
+            "pdm": {"build": {"hooks": {"fancy-pypi-readme": readme_config}}}
         },
     }
     return _remove_null_values(data)
