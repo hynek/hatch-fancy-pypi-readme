@@ -11,7 +11,7 @@ from contextlib import closing
 from pathlib import Path
 from typing import TextIO
 
-from ._cli import cli_run
+from ._cli import Backend, cli_run
 
 
 if sys.version_info < (3, 11):
@@ -46,16 +46,23 @@ def main() -> None:
         help="Target file for output. Default: standard out.",
         metavar="TARGET-FILE-PATH",
     )
+    parser.add_argument(
+        "--backend",
+        choices=[enum.value for enum in Backend],
+        default=Backend.AUTO.value,
+        help="Build backend in use. Default: auto-detect from pyproject.toml.",
+    )
     args = parser.parse_args()
 
     pyproject = tomllib.loads(Path(args.pyproject_path).read_text())
     hatch_toml = _maybe_load_hatch_toml(args.hatch_toml)
+    backend = Backend(args.backend)
 
     out: TextIO
     out = Path(args.o).open("w") if args.o else sys.stdout  # noqa: SIM115
 
     with closing(out):
-        cli_run(pyproject, hatch_toml, out)
+        cli_run(pyproject, hatch_toml, out, backend)
 
 
 def _maybe_load_hatch_toml(hatch_toml_arg: str | None) -> dict[str, object]:
