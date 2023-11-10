@@ -6,6 +6,7 @@ import shutil
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import NamedTuple
 
 import pytest
 
@@ -34,8 +35,25 @@ def _plugin_dir():
         yield directory.resolve()
 
 
+class BuildSystem(NamedTuple):
+    dist: str
+    backend: str
+
+
+@pytest.fixture(
+    name="build_system",
+    params=[
+        BuildSystem("hatchling", "hatchling.build"),
+        BuildSystem("pdm-backend", "pdm.backend"),
+    ],
+    ids=lambda build_system: build_system.dist,
+)
+def _build_system(request):
+    return request.param
+
+
 @pytest.fixture(name="new_project")
-def _new_project(plugin_dir, tmp_path, monkeypatch):
+def _new_project(plugin_dir, build_system, tmp_path, monkeypatch):
     """
     Create, and cd into, a blank new project that is configured to use our
     temporary plugin installation.
@@ -47,8 +65,11 @@ def _new_project(plugin_dir, tmp_path, monkeypatch):
     project_file.write_text(
         f"""\
 [build-system]
-requires = ["hatchling", "hatch-fancy-pypi-readme @ {plugin_dir.as_uri()}"]
-build-backend = "hatchling.build"
+requires = [
+    "{build_system.dist}",
+    "hatch-fancy-pypi-readme @ {plugin_dir.as_uri()}",
+]
+build-backend = "{build_system.backend}"
 
 [project]
 name = "my-app"
