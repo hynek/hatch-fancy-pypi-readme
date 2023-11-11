@@ -5,7 +5,7 @@
 [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
 
-*hatch-fancy-pypi-readme* is a [Hatch] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
+*hatch-fancy-pypi-readme* is a [Hatch] metadata and [PDM-Backend] plugin for everyone who cares about the first impression of their project’s PyPI landing page.
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
 **parts of files** defined using **cut-off points** or **regular expressions**.
 
@@ -60,7 +60,7 @@ Now *you* too can have fancy PyPI readmes – just by adding a few lines of conf
 
 ## Configuration
 
-*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`[^hatch-toml].
+*hatch-fancy-pypi-readme* is, like [Hatch], configured in your project’s `pyproject.toml`[^hatch-toml]. (See the *Use with PDM-Backend* section, below, for details on use with the `pdm-backend` instead of the `hatchling` build backend.)
 
 [^hatch-toml]: As with Hatch, you can also use `hatch.toml` for configuration options that start with `tool.hatch` and leave that prefix out.
   That means `pyprojects.toml`’s `[tool.hatch.metadata.hooks.fancy-pypi-readme]` becomes `[metadata.hooks.fancy-pypi-readme]` when in `hatch.toml`.
@@ -230,6 +230,37 @@ replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\
 Again, please check out our [example configuration][example-config] for a complete example.
 
 
+## Use with PDM-Backend
+
+*Hatch-fancy-pypi-readme* will also work as a [PDM-Backend] plugin. Usage with *PDM-Backend* is essentially the same except that:
+
+1. Configuration is obtained from the
+   `tool.pdm.build.hooks.fancy-pypi-readme` table (rather than the
+   `tool.hatch.metadata.hooks.fancy-pypi-readme` table) in
+   `pyproject.toml`.
+
+2. Any configuration in `hatch.toml` is ignored.
+
+Here is a minimal sample `pyproject.toml` that uses the [PDM] build backend:
+
+```toml
+[build-system]
+requires = ["pdm-backend", "hatch-fancy-pypi-readme"]
+build-backend = "pdm.backend"
+
+[project]
+name = "my-project"
+version = "0.1.0"
+dynamic = ["readme"]
+
+[tool.pdm.build.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+text = "Fragment #1"
+```
+
+
 ## CLI Interface
 
 For faster feedback loops, *hatch-fancy-pypi-readme* comes with a CLI interface that takes a `pyproject.toml` file as an argument and renders out the readme that would go into respective package.
@@ -283,3 +314,5 @@ with our [example configuration][example-config], you will get the following out
 
 [example-config]: tests/example_pyproject.toml
 [Hatch]: https://hatch.pypa.io/
+[PDM]: https://pdm-project.org/
+[PDM-Backend]: https://backend.pdm-project.org/
