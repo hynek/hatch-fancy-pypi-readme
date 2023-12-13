@@ -17,23 +17,23 @@ def build_project(*args, check=True):
 
 
 @pytest.mark.slow()
-def test_build(new_project):
+def test_build(new_project, build_system):
     """
     Build a fake project end-to-end and verify wheel contents.
     """
     append(
         new_project / "pyproject.toml",
-        """
-[tool.hatch.metadata.hooks.fancy-pypi-readme]
+        f"""
+[{build_system.config_prefix}.fancy-pypi-readme]
 content-type = "text/markdown"
 
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+[[{build_system.config_prefix}.fancy-pypi-readme.fragments]]
 text = '''# Level 1
 
 Fancy *Markdown*.
 '''
 
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+[[{build_system.config_prefix}.fancy-pypi-readme.fragments]]
 text = "---\\nFooter"
 """,
     )
@@ -59,7 +59,7 @@ text = "---\\nFooter"
 
 
 @pytest.mark.slow()
-def test_invalid_config(new_project):
+def test_invalid_config(new_project, build_system):
     """
     Missing config makes the build fail with a meaningful error message.
     """
@@ -67,17 +67,17 @@ def test_invalid_config(new_project):
 
     # If we leave out the config for good, the plugin doesn't get activated.
     pyp.write_text(
-        pyp.read_text() + "[tool.hatch.metadata.hooks.fancy-pypi-readme]"
+        pyp.read_text() + f"[{build_system.config_prefix}.fancy-pypi-readme]"
     )
 
     out = build_project(check=False)
 
     assert "hatch_fancy_pypi_readme.exceptions.ConfigurationError:" in out
     assert (
-        "tool.hatch.metadata.hooks.fancy-pypi-readme.content-type "
+        f"{build_system.config_prefix}.fancy-pypi-readme.content-type "
         "is missing." in out
     )
     assert (
-        "tool.hatch.metadata.hooks.fancy-pypi-readme.fragments "
+        f"{build_system.config_prefix}.fancy-pypi-readme.fragments "
         "is missing." in out
     )

@@ -26,7 +26,6 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-  "hatchling",
   "tomli; python_version<'3.11'",
   "typing-extensions; python_version<'3.8'",
 ]
@@ -34,11 +33,14 @@ dependencies = [
 [project.entry-points.hatch]
 fancy-pypi-readme = "hatch_fancy_pypi_readme.hooks"
 
+[project.entry-points."pdm.build.hook"]
+fancy-pypi-readme = "hatch_fancy_pypi_readme.pdm:FancyReadmeHook"
+
 [project.scripts]
 hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
 
 [project.optional-dependencies]
-tests = ["pytest", "build", "wheel"]
+tests = ["pytest", "build", "wheel", "hatchling", "pdm.backend"]
 dev = ["hatch-fancy-pypi-readme[tests]", "mypy"]
 
 [project.urls]

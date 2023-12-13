@@ -1,0 +1,50 @@
+[build-system]
+requires = ["pdm-backend", "hatch-fancy-pypi-readme"]
+build-backend = "pdm.backend"
+
+
+[project]
+name = "my-pkg"
+version = "1.0"
+dynamic = ["readme"]
+
+
+[tool.pdm.build.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+text = '''# Level 1 Header
+
+This is *Markdown* in a literal string.
+
+Let's import `AUTHORS.md` without its header and last paragraph next:
+
+'''
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+path = "AUTHORS.md"
+start-after = "Authors\n"
+end-before = "A full"
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+text = """
+---
+
+Now let's add an extract from [`tests/example_changelog.md`](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/tests/example_changelog.md):
+
+"""
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+path = "tests/example_changelog.md"
+pattern = "<!-- changelog follows -->\n\n\n(.*?)\n\n## "
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.fragments]]
+text = "\n---\n\nPretty **cool**, huh? ✨"
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.substitutions]]
+pattern = "#(\\d+)"
+replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\1)"
+
+[[tool.pdm.build.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
+replacement = '[\1](https://github.com/hynek/hatch-fancy-pypi-readme/tree/main/\g<2>)'
