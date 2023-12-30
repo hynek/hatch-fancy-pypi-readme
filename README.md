@@ -230,6 +230,14 @@ replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\
 Again, please check out our [example configuration][example-config] for a complete example.
 
 
+### Referencing Packaging Metadata
+
+If the final contains the string `$HFPR_VERSION`, it is replaced by the current package version.
+
+When running *hatch-fancy-pypi-readme* in CLI mode (as described in the next section), packaging metadata is not available.
+In that case `$HFPR_VERSION` is hardcoded to `42.0` so you can still test your readme.
+
+
 ## CLI Interface
 
 For faster feedback loops, *hatch-fancy-pypi-readme* comes with a CLI interface that takes a `pyproject.toml` file as an argument and renders out the readme that would go into respective package.
@@ -243,7 +251,7 @@ Therefore we recommend running it using [*pipx*](https://pypa.github.io/pipx/):
 
 
 ```shell
-pipx run hatch-fancy-pypi-readme
+$ pipx run hatch-fancy-pypi-readme
 ```
 
 ---

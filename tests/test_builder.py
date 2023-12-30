@@ -11,8 +11,8 @@ class TestBuildText:
         """
         A single text fragment becomes the readme.
         """
-        assert "This is the README!" == build_text(
-            [TextFragment("This is the README!")], []
+        assert "This is the README for 1.0!" == build_text(
+            [TextFragment("This is the README for $HFPR_VERSION!")], [], "1.0"
         )
 
     def test_multiple_text_fragment(self):
@@ -26,4 +26,5 @@ class TestBuildText:
                 TextFragment("This is the README!"),
             ],
             [],
+            "1.0",
         )
