@@ -13,6 +13,12 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/23.1.0...HEAD)
 
+### Added
+
+- `$HFPR_VERSION` is now replaced by the package version in the PyPI readme.
+  The version is not available in CLI mode, therefore it's replaced by the dummy value of `42.0`.
+
+
 ## [23.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/22.8.0...23.1.0) - 2023-05-22
 
 ### Added

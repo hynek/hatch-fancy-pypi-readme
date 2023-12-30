@@ -13,11 +13,13 @@ if TYPE_CHECKING:
 
 
 def build_text(
-    fragments: list[Fragment], substitutions: list[Substituter]
+    fragments: list[Fragment],
+    substitutions: list[Substituter],
+    version: str,
 ) -> str:
     text = "".join(f.render() for f in fragments)
 
     for sub in substitutions:
         text = sub.substitute(text)
 
-    return text
+    return text.replace("$HFPR_VERSION", version)

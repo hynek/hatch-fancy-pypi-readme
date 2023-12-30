@@ -65,7 +65,7 @@ def cli_run(
             + "\n".join(f"- {msg}" for msg in e.errors),
         )
 
-    print(build_text(config.fragments, config.substitutions), file=out)
+    print(build_text(config.fragments, config.substitutions, "42.0"), file=out)
 
 
 def _fail(msg: str) -> NoReturn:

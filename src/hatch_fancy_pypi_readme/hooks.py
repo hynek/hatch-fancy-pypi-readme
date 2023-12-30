@@ -20,12 +20,15 @@ class FancyReadmeMetadataHook(MetadataHookInterface):
         """
         Update the project table's metadata.
         """
-
         config = load_and_validate_config(self.config)
 
         metadata["readme"] = {
             "content-type": config.content_type,
-            "text": build_text(config.fragments, config.substitutions),
+            "text": build_text(
+                config.fragments,
+                config.substitutions,
+                version=metadata.get("version", ""),
+            ),
         }
 
 
