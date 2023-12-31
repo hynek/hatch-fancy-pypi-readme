@@ -1,9 +1,10 @@
 # Your ✨Fancy✨ Project Deserves a ✨Fancy✨ PyPI Readme!
 
-[![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
 [![Hatch project](https://img.shields.io/badge/%F0%9F%A5%9A-Hatch-4051b5.svg)](https://github.com/pypa/hatch)
 [![License: MIT](https://img.shields.io/badge/license-MIT-C06524)](https://github.com/hynek/hatch-fancy-pypi-readme/blob/main/LICENSE.txt)
+[![PyPI - Version](https://img.shields.io/pypi/v/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hatch-fancy-pypi-readme.svg)](https://pypi.org/project/hatch-fancy-pypi-readme)
+[![Downloads](https://static.pepy.tech/badge/hatch-fancy-pypi-readme/month)](https://pepy.tech/project/hatch-fancy-pypi-readme)
 
 *hatch-fancy-pypi-readme* is a [Hatch] metadata plugin for everyone who cares about the first impression of their project’s PyPI landing page.
 It allows you to define your PyPI project description in terms of concatenated fragments that are based on **static strings**, **files**, and most importantly:
@@ -24,20 +25,20 @@ You’ve come to the right place!
 ### Showcases 🧐
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
-- [*Awkward Array*](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
+- [Awkward Array](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
 - [*Black*](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
 - [*doc2dash*](https://pypi.org/project/doc2dash/) ([`pyproject.toml`](https://github.com/hynek/doc2dash/blob/main/pyproject.toml))
 - [*environ-config*](https://pypi.org/project/environ-config/) ([`pyproject.toml`](https://github.com/hynek/environ-config/blob/main/pyproject.toml))
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
-- [*Gradio*](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
+- [Gradio](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*httpx*](https://pypi.org/project/httpx/) ([`pyproject.toml`](https://github.com/encode/httpx/blob/master/pyproject.toml))
-- [*OpenLLM*](https://github.com/bentoml/OpenLLM) ([`pyproject.toml`](https://github.com/bentoml/OpenLLM/blob/main/openllm-python/pyproject.toml))
-- [*Pydantic*](https://pypi.org/project/pydantic/) ([`pyproject.toml`](https://github.com/pydantic/pydantic/blob/main/pyproject.toml))
+- [OpenLLM](https://github.com/bentoml/OpenLLM) ([`pyproject.toml`](https://github.com/bentoml/OpenLLM/blob/main/openllm-python/pyproject.toml))
+- [Pydantic](https://pypi.org/project/pydantic/) ([`pyproject.toml`](https://github.com/pydantic/pydantic/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - [*scikit-build*](https://pypi.org/project/scikit-build/) ([`pyproject.toml`](https://github.com/scikit-build/scikit-build/blob/main/pyproject.toml))
 - [*stamina*](https://pypi.org/project/stamina/) ([`pyproject.toml`](https://github.com/hynek/stamina/blob/main/pyproject.toml))
 - [*structlog*](https://pypi.org/project/structlog/) ([`pyproject.toml`](https://github.com/hynek/structlog/blob/main/pyproject.toml))
-- [*Twisted*](https://pypi.org/project/twisted/) ([`pyproject.toml`](https://github.com/twisted/twisted/blob/trunk/pyproject.toml))
+- [Twisted](https://pypi.org/project/twisted/) ([`pyproject.toml`](https://github.com/twisted/twisted/blob/trunk/pyproject.toml))
 
 *hatch-fancy-pypi-readme* doesn’t use itself to avoid a circular dependency that can be problematic in some cases.
 The shoemaker’s kids always go barefoot.
@@ -151,7 +152,7 @@ Additionally it’s possible to cut away parts of the file before appending it:
 
   to find it.
 
-Both Markdown and *reST* have comments (`<!-- this is a Markdown comment -->` and `.. this is a reST comment`) that you can use for invisible markers:
+Both Markdown and reStructuredText (reST) have comments (`<!-- this is a Markdown comment -->` and `.. this is a reST comment`) that you can use for invisible markers:
 
 ```markdown
 # Boring Header
@@ -183,7 +184,7 @@ would append:
 
 to your readme.
 
-> [!NOTE]
+> [!HINT]
 >
 > - You can insert the same file **multiple times** – each time a different part!
 > - The order of the options in a fragment block does *not* matter.
@@ -232,7 +233,7 @@ Again, please check out our [example configuration][example-config] for a comple
 
 ### Referencing Packaging Metadata
 
-If the final contains the string `$HFPR_VERSION`, it is replaced by the current package version.
+If the final readme contains the string `$HFPR_VERSION`, it is replaced by the current package version.
 
 When running *hatch-fancy-pypi-readme* in CLI mode (as described in the next section), packaging metadata is not available.
 In that case `$HFPR_VERSION` is hardcoded to `42.0` so you can still test your readme.
@@ -279,14 +280,6 @@ with our [example configuration][example-config], you will get the following out
 >
 > - `hatch project metadata readme` gives you a rendered version of the readme.
 > - `hatch project metadata | jq -r .readme.text` gives you the raw Markdown (needs [*jq*](https://jqlang.github.io/jq/)).
-
-
-## Project Links
-
-- [**Documentation**](https://github.com/hynek/hatch-fancy-pypi-readme#readme)
-- [**Changelog**](CHANGELOG.md)
-- [**PyPI**](https://pypi.org/project/hatch-fancy-pypi-readme/)
-- [**GitHub**](https://github.com/hynek/hatch-fancy-pypi-readme)
 
 
 [example-config]: tests/example_pyproject.toml
