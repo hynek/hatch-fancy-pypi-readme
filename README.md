@@ -24,7 +24,8 @@ You’ve come to the right place!
 
 ### Showcases 🧐
 
-<!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
+<!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. If your project is lower-case, add it emphasized (surrounded by *), otherwise leave it plain. -->
+- [*attrs*](https://pypi.org/project/attrs/) ([`pyproject.toml`](https://github.com/python-attrs/attrs/blob/main/pyproject.toml))
 - [Awkward Array](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
 - [Black](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
 - [*doc2dash*](https://pypi.org/project/doc2dash/) ([`pyproject.toml`](https://github.com/hynek/doc2dash/blob/main/pyproject.toml))
