@@ -26,7 +26,7 @@ You’ve come to the right place!
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. -->
 - [Awkward Array](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
-- [*Black*](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
+- [Black](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
 - [*doc2dash*](https://pypi.org/project/doc2dash/) ([`pyproject.toml`](https://github.com/hynek/doc2dash/blob/main/pyproject.toml))
 - [*environ-config*](https://pypi.org/project/environ-config/) ([`pyproject.toml`](https://github.com/hynek/environ-config/blob/main/pyproject.toml))
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
@@ -184,7 +184,7 @@ would append:
 
 to your readme.
 
-> [!HINT]
+> [!TIP]
 >
 > - You can insert the same file **multiple times** – each time a different part!
 > - The order of the options in a fragment block does *not* matter.
