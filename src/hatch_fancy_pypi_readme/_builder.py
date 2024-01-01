@@ -15,8 +15,12 @@ if TYPE_CHECKING:
 def build_text(
     fragments: list[Fragment],
     substitutions: list[Substituter],
-    version: str,
+    version: str = "",
 ) -> str:
+    """
+    Try avoiding breaking the API unnecessarily; it's used directly by
+    scikit-build-core.
+    """
     text = "".join(f.render() for f in fragments)
 
     for sub in substitutions:

@@ -13,6 +13,10 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/23.2.0...HEAD)
 
+### Fixed
+
+- Added a default to an internal API that is used by *scikit-build-core*.
+
 
 ## [23.2.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/23.1.0...23.2.0) - 2023-12-31
 
