@@ -220,13 +220,21 @@ pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
 replacement = '[\1](https://github.com/hynek/hatch-fancy-pypi-readme/tree/main\g<2>)'
 ```
 
-Or expanding GitHub issue/pull request IDs to links:
+Or, expanding GitHub issue/pull request IDs to links:
 
 ```toml
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # Regular TOML strings (double quotes) do need escaping.
 pattern = "#(\\d+)"
 replacement = "[#\\1](https://github.com/hynek/hatch-fancy-pypi-readme/issues/\\1)"
+```
+
+Or, replacing [GitHub-style callouts](https://github.com/orgs/community/discussions/16925) that aren't supported by PyPI with bolded text:
+
+```toml
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]'
+replacement = '**\1**:'
 ```
 
 Again, please check out our [example configuration][example-config] for a complete example.
