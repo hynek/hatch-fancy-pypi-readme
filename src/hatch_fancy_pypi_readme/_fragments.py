@@ -24,11 +24,9 @@ class Fragment(Protocol):
     key: ClassVar[str]
 
     @classmethod
-    def from_config(cls, cfg: dict[str, str]) -> Fragment:
-        ...
+    def from_config(cls, cfg: dict[str, str]) -> Fragment: ...
 
-    def render(self) -> str:
-        ...
+    def render(self) -> str: ...
 
 
 @dataclass
