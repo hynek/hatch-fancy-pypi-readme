@@ -34,6 +34,9 @@ dependencies = [
 [project.entry-points.hatch]
 fancy-pypi-readme = "hatch_fancy_pypi_readme.hooks"
 
+[project.entry-points."setuptools.finalize_distribution_options"]
+fancy-pypi-readme = "hatch_fancy_pypi_readme._setuptools:update_metadata"
+
 [project.scripts]
 hatch-fancy-pypi-readme = "hatch_fancy_pypi_readme.__main__:main"
 
