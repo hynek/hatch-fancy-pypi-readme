@@ -104,10 +104,6 @@ partial_branches = [
 ]
 
 
-[tool.black]
-line-length = 79
-
-
 [tool.mypy]
 strict = true
 follow_imports = "normal"
@@ -123,26 +119,26 @@ ignore_errors = true
 
 [tool.ruff]
 src = ["src", "tests"]
+line-length = 79
 
-[tool.lintruff]
+[tool.ruff.lint]
 select = ["ALL"]
-
 ignore = [
-  "ANN",      # Mypy is better at this.
-  "C901",     # Leave complexity to me.
-  "COM",      # Leave commas to Black.
-  "D",        # We have different ideas about docstrings.
-  "E501",     # leave line-length enforcement to Black
-  "PLR0912",  # Leave complexity to me.
-  "TRY301",   # Raise in try blocks can totally make sense.
+  "ANN",     # Mypy is better at this.
+  "C901",    # Leave complexity to me.
+  "COM",     # Leave commas to formatter.
+  "D",       # We have different ideas about docstrings.
+  "E501",    # leave line-length enforcement to formatter.
+  "ISC001",  # conflicts with formatter
+  "PLR0912", # Leave complexity to me.
+  "TRY301",  # Raise in try blocks can totally make sense.
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"src/hatch_fancy_pypi_readme/_cli.py" = ["T201"]  # need print in CLI
+"src/hatch_fancy_pypi_readme/_cli.py" = ["T201"] # need print in CLI
 "tests/*" = [
   "PLC1901", # empty strings are falsey, but are less specific in tests
-  "PT005",   # we use always underscores and explicit names
-  "S101",    # assert
+  "S",       # Security is not an issue in our tests.
   "SIM300",  # Yoda rocks in tests
 ]
 

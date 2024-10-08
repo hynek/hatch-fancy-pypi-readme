@@ -48,59 +48,50 @@ class TestFileFragment:
         Specifying a `start-after` that exists in the file removes it along
         with what comes before.
         """
-        assert (
-            """This is the *interesting* body!
+        assert """This is the *interesting* body!
 
 <!-- but before this -->
 
 Uninteresting Footer
-"""
-            == FileFragment.from_config(
-                {
-                    "path": str(txt_path),
-                    "start-after": "<!-- cut after this -->\n\n",
-                }
-            ).render()
-        )
+""" == FileFragment.from_config(
+            {
+                "path": str(txt_path),
+                "start-after": "<!-- cut after this -->\n\n",
+            }
+        ).render()
 
     def test_start_at_ok(self, txt_path):
         """
         Specifying a `start-at` that exists in the file removes everything
         before the string, but not the string itself.
         """
-        assert (
-            """This is the *interesting* body!
+        assert """This is the *interesting* body!
 
 <!-- but before this -->
 
 Uninteresting Footer
-"""
-            == FileFragment.from_config(
-                {
-                    "path": str(txt_path),
-                    "start-at": "This is the *interesting* body!",
-                }
-            ).render()
-        )
+""" == FileFragment.from_config(
+            {
+                "path": str(txt_path),
+                "start-at": "This is the *interesting* body!",
+            }
+        ).render()
 
     def test_end_before_ok(self, txt_path):
         """
         Specifying an `end-before` that exists in the file cuts it off along
         with everything that follows.
         """
-        assert (
-            """# Boring Header
+        assert """# Boring Header
 
 <!-- cut after this -->
 
-This is the *interesting* body!"""
-            == FileFragment.from_config(
-                {
-                    "path": str(txt_path),
-                    "end-before": "\n\n<!-- but before this -->",
-                }
-            ).render()
-        )
+This is the *interesting* body!""" == FileFragment.from_config(
+            {
+                "path": str(txt_path),
+                "end-before": "\n\n<!-- but before this -->",
+            }
+        ).render()
 
     def test_start_end_ok(self, txt_path):
         """

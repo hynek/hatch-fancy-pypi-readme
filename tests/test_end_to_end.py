@@ -16,7 +16,7 @@ def build_project(*args, check=True):
     return run("build", *args, check=check)
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_build(new_project):
     """
     Build a fake project end-to-end and verify wheel contents.
@@ -58,7 +58,7 @@ text = "---\\nFooter"
     )
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_invalid_config(new_project):
     """
     Missing config makes the build fail with a meaningful error message.

@@ -10,7 +10,7 @@ import pytest
 
 def run(*args, check=True):
     process = subprocess.run(  # noqa: PLW1510
-        [sys.executable, "-m", *args],  # noqa: S603
+        [sys.executable, "-m", *args],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         encoding="utf-8",
