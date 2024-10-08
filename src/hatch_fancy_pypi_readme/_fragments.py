@@ -5,17 +5,10 @@
 from __future__ import annotations
 
 import re
-import sys
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar, Iterable
-
-
-if sys.version_info >= (3, 8):
-    from typing import Protocol
-else:
-    from typing_extensions import Protocol
+from typing import ClassVar, Iterable, Protocol
 
 from .exceptions import ConfigurationError
 
