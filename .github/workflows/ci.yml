@@ -128,7 +128,9 @@ jobs:
           python-version-file: .python-version-default
       - uses: hynek/setup-cached-uv@v2
 
-      - run: uvx run --with tox-uv tox run -e mypy
+      - run: >
+          uvx --with tox-uv
+          tox run -e mypy
 
   install-dev:
     name: Verify dev env
