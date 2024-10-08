@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 name = "hatch-fancy-pypi-readme"
 version = "24.2.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 keywords = ["hatch", "pypi", "readme", "documentation"]
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 license = "MIT"
@@ -18,17 +18,16 @@ classifiers = [
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Build Tools",
 
-  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
   "hatchling",
   "tomli; python_version<'3.11'",
-  "typing-extensions; python_version<'3.8'",
 ]
 
 [project.entry-points.hatch]
