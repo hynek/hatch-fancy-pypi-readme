@@ -6,7 +6,6 @@ on:
     branches: [main]
     tags: ["*"]
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 env:
@@ -14,6 +13,9 @@ env:
   PYTHONIOENCODING: utf-8
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
   PIP_NO_PYTHON_VERSION_WARNING: "1"
+
+permissions: {}
+
 
 jobs:
   build-package:
@@ -26,6 +28,12 @@ jobs:
           fetch-depth: 0
 
       - uses: hynek/build-and-inspect-python-package@v2
+        id: baipp
+
+    outputs:
+      # Used to define the matrix for tests below. The value is based on
+      # packaging metadata (trove classifiers).
+      python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
 
   tests:
     name: Tests on ${{ matrix.python-version }}
@@ -35,13 +43,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version:
-          - "3.7"
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "3.12"
+        # Created by the build-and-inspect-python-package action above.
+        python-version: ${{ fromJson(needs.build-package.outputs.python-versions) }}
 
     steps:
       - name: Download pre-built packages
@@ -52,16 +55,15 @@ jobs:
       - run: tar xf dist/*.tar.gz --strip-components=1  # needed for config files
       - uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
+      - uses: hynek/setup-cached-uv@v2
 
-      - run: python -Im pip install tox
-
-      - run: |
-          python -Im tox run \
-            --installpkg dist/*.whl \
-            -f py$(echo ${{ matrix.python-version }} | tr -d .)
+      - run: >
+          uvx --with tox-uv
+          tox run
+          --installpkg dist/*.whl
+          -f py$(echo ${{ matrix.python-version }} | tr -d .)
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
@@ -91,17 +93,16 @@ jobs:
 
       - name: Combine coverage and fail if it's <100%.
         run: |
-          python -Im pip install --upgrade coverage[toml]
+          uv tool install coverage[toml]
 
-          python -Im coverage combine
-          python -Im coverage html --skip-covered --skip-empty
+          coverage combine
+          coverage html --skip-covered --skip-empty
 
           # Report and write to summary.
-          python -Im coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
+          coverage report --format=markdown >> $GITHUB_STEP_SUMMARY
 
           # Report again and fail if under 100%.
-          python -Im coverage report --fail-under=100
-
+          coverage report --fail-under=100
 
       - name: Upload HTML report if check failed.
         uses: actions/upload-artifact@v4
@@ -124,12 +125,9 @@ jobs:
       - run: tar xf dist/*.tar.gz --strip-components=1  # needed for config files
       - uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version-file: .python-version-default
 
-      - run: python -Im pip install tox
-
-      - run: python -Im tox run -e mypy
+      - run: uvx run --with tox-uv tox run -e mypy
 
   install-dev:
     name: Verify dev env
