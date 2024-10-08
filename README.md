@@ -25,6 +25,7 @@ You’ve come to the right place!
 ### Showcases 🧐
 
 <!-- Please add your project in alphabetic order, except leave hatch-fancy-pypi-readme last. If your project is lower-case, add it emphasized (surrounded by *), otherwise leave it plain. -->
+- [Anthropic SDK](https://pypi.org/project/anthropic/) ([`pyproject.toml`](https://github.com/anthropics/anthropic-sdk-python/blob/main/pyproject.toml))
 - [*attrs*](https://pypi.org/project/attrs/) ([`pyproject.toml`](https://github.com/python-attrs/attrs/blob/main/pyproject.toml))
 - [Awkward Array](https://pypi.org/project/awkward/) ([`pyproject.toml`](https://github.com/scikit-hep/awkward/blob/main/pyproject.toml))
 - [Black](https://pypi.org/project/black/) ([`pyproject.toml`](https://github.com/psf/black/blob/main/pyproject.toml))
@@ -33,7 +34,7 @@ You’ve come to the right place!
 - [*jsonschema*](https://pypi.org/project/jsonschema/) ([`pyproject.toml`](https://github.com/python-jsonschema/jsonschema/blob/main/pyproject.toml))
 - [Gradio](https://pypi.org/project/gradio/) ([`pyproject.toml`](https://github.com/gradio-app/gradio/blob/main/pyproject.toml))
 - [*httpx*](https://pypi.org/project/httpx/) ([`pyproject.toml`](https://github.com/encode/httpx/blob/master/pyproject.toml))
-- [OpenLLM](https://github.com/bentoml/OpenLLM) ([`pyproject.toml`](https://github.com/bentoml/OpenLLM/blob/main/openllm-python/pyproject.toml))
+- [OpenAI SDK](https://pypi.org/project/openai/) ([`pyproject.toml`](https://github.com/openai/openai-python/blob/main/pyproject.toml))
 - [Pydantic](https://pypi.org/project/pydantic/) ([`pyproject.toml`](https://github.com/pydantic/pydantic/blob/main/pyproject.toml))
 - [*pytermgui*](https://pypi.org/project/pytermgui/) ([`pyproject.toml`](https://github.com/bczsalba/pytermgui/blob/master/pyproject.toml))
 - [*scikit-build*](https://pypi.org/project/scikit-build/) ([`pyproject.toml`](https://github.com/scikit-build/scikit-build/blob/main/pyproject.toml))
