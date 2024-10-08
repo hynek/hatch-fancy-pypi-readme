@@ -72,12 +72,12 @@ def test_invalid_config(new_project):
 
     out = build_project(check=False)
 
-    assert "hatch_fancy_pypi_readme.exceptions.ConfigurationError:" in out
+    assert "hatch_fancy_pypi_readme.exceptions.ConfigurationError:" in out, out
     assert (
         "tool.hatch.metadata.hooks.fancy-pypi-readme.content-type "
         "is missing." in out
-    )
+    ), out
     assert (
         "tool.hatch.metadata.hooks.fancy-pypi-readme.fragments "
         "is missing." in out
-    )
+    ), out
