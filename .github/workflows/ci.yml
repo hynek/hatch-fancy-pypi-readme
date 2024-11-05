@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: hynek/build-and-inspect-python-package@v2
         id: baipp
@@ -46,6 +47,9 @@ jobs:
         # Created by the build-and-inspect-python-package action above.
         python-version: ${{ fromJson(needs.build-package.outputs.python-versions) }}
 
+    env:
+      PYTHON: ${{ matrix.python-version }}
+
     steps:
       - name: Download pre-built packages
         uses: actions/download-artifact@v4
@@ -63,7 +67,7 @@ jobs:
           uvx --with tox-uv
           tox run
           --installpkg dist/*.whl
-          -f py$(echo ${{ matrix.python-version }} | tr -d .)
+          -f py$(echo $PYTHON | tr -d .)
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
@@ -80,6 +84,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version-default
@@ -141,6 +147,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           cache: pip
