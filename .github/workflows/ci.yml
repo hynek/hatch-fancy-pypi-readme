@@ -151,7 +151,6 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          cache: pip
           python-version-file: .python-version-default
 
       - run: python -Im pip install -e .[dev]

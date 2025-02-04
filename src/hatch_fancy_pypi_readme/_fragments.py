@@ -111,8 +111,7 @@ class FileFragment:
                     contents = m.group(1)
                 except IndexError:
                     errs.append(
-                        "file fragment: pattern matches, but no group "
-                        "defined."
+                        "file fragment: pattern matches, but no group defined."
                     )
 
         if errs:
