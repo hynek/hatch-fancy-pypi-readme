@@ -33,9 +33,9 @@ jobs:
 
   # Upload to Test PyPI on every commit on main.
   release-test-pypi:
-    name: Publish in-dev package to test.pypi.org
+    name: Publish tagged package to test.pypi.org
     environment: release-test-pypi
-    if: github.repository_owner == 'hynek' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     needs: build-package
 
