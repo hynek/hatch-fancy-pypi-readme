@@ -49,7 +49,7 @@ class Substituter:
         if errs:
             raise ConfigurationError(errs)
 
-        return cls(pattern, cast(str, replacement))
+        return cls(pattern, cast("str", replacement))
 
     def substitute(self, text: str) -> str:
         return self.pattern.sub(self.replacement, text)
