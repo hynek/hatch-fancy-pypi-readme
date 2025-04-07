@@ -56,7 +56,7 @@ def load_and_validate_config(config: dict[str, Any]) -> Config:
         raise ConfigurationError(errs)
 
     return Config(
-        content_type=cast(str, ct),
+        content_type=cast("str", ct),
         fragments=fragments,
         substitutions=substitutions,
     )
