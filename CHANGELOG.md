@@ -13,6 +13,11 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/24.1.0...HEAD)
 
+### Added
+
+- `$HFPR_PACKAGE_NAME` is now replaced by the package name in the PyPI readme.
+  The version is not available in CLI mode, therefore it's replaced by the dummy value of `your-package`.
+
 ### Removed
 
 - Support for Python 3.7.

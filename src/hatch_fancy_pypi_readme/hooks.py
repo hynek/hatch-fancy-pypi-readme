@@ -27,6 +27,7 @@ class FancyReadmeMetadataHook(MetadataHookInterface):
             "text": build_text(
                 config.fragments,
                 config.substitutions,
+                package_name=metadata.get("name", ""),
                 version=metadata.get("version", ""),
             ),
         }
