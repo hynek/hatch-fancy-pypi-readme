@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hatch-fancy-pypi-readme"
-version = "25.1.0"
+version = "25.2.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
 requires-python = ">=3.8"
 keywords = ["hatch", "pypi", "readme", "documentation"]
