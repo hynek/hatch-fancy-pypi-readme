@@ -11,10 +11,10 @@ requires-python = ">=3.8"
 keywords = ["hatch", "pypi", "readme", "documentation"]
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 license = "MIT"
+license-files = ["LICENSE.txt"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Framework :: Hatch",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Build Tools",
 
