@@ -243,10 +243,10 @@ Again, please check out our [example configuration][example-config] for a comple
 
 ### Referencing Packaging Metadata
 
-If the final readme contains the string `$HFPR_VERSION`, it is replaced by the current package version.
+If the final readme contains the strings `$HFPR_PACKAGE_NAME` or `$HFPR_VERSION`, they will be replaced by the current package name or version.
 
 When running *hatch-fancy-pypi-readme* in CLI mode (as described in the next section), packaging metadata is not available.
-In that case `$HFPR_VERSION` is hardcoded to `42.0` so you can still test your readme.
+In that case `$HFPR_PACKAGE_NAME` is hardcoded to `your-package`, and `$HFPR_VERSION` to `42.0`, so you can still test your readme.
 
 
 ## CLI Interface

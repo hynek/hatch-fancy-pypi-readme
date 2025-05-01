@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 def build_text(
     fragments: list[Fragment],
     substitutions: list[Substituter],
+    package_name: str = "",
     version: str = "",
 ) -> str:
     """
@@ -26,4 +27,6 @@ def build_text(
     for sub in substitutions:
         text = sub.substitute(text)
 
-    return text.replace("$HFPR_VERSION", version)
+    return text.replace("$HFPR_PACKAGE_NAME", package_name).replace(
+        "$HFPR_VERSION", version
+    )
