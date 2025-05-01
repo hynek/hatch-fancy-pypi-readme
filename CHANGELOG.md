@@ -19,6 +19,7 @@ The **third number** is for emergencies when we need to start branches for older
   The version is not available in CLI mode, therefore it's replaced by the dummy value of `your-package`.
   [#64](https://github.com/hynek/hatch-fancy-pypi-readme/pull/64)
 
+
 ### Removed
 
 - Support for Python 3.7.
