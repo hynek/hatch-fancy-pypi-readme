@@ -99,7 +99,7 @@ jobs:
 
       - name: Combine coverage and fail if it's <100%.
         run: |
-          uv tool install coverage[toml]
+          uv tool install coverage
 
           coverage combine
           coverage html --skip-covered --skip-empty
@@ -153,7 +153,7 @@ jobs:
         with:
           python-version-file: .python-version-default
 
-      - run: python -Im pip install -e .[dev]
+      - run: python -Im pip install -e . --group dev
       - run: python -Ic 'import hatch_fancy_pypi_readme'
       - run: python -m hatch_fancy_pypi_readme tests/example_pyproject.toml
       - run: hatch-fancy-pypi-readme tests/example_pyproject.toml

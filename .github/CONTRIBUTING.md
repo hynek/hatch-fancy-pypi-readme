@@ -45,13 +45,13 @@ layout python python$(cat .python-version-default)
 You can now install the package with its development dependencies into the virtual environment:
 
 ```console
-$ pip install -e .[dev]
+$ pip install -e . --group dev
 ```
 
 Now you can run the test suite:
 
 ```console
-$ python -m pytest
+$ python -Im pytest
 ```
 
 To avoid committing code that violates our style guide, we strongly advise you to install [*pre-commit*] and its hooks:
