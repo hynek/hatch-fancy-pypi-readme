@@ -8,9 +8,13 @@ import re
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar, Iterable, Protocol
+from typing import TYPE_CHECKING, ClassVar, Protocol
 
 from .exceptions import ConfigurationError
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 class Fragment(Protocol):

@@ -13,6 +13,11 @@ The **third number** is for emergencies when we need to start branches for older
 
 ## [Unreleased](https://github.com/hynek/hatch-fancy-pypi-readme/compare/25.1.0...HEAD)
 
+### Removed
+
+- Support for Python 3.8 and 3.9.
+  [#94](https://github.com/hynek/hatch-fancy-pypi-readme/pull/94)
+
 
 ## [25.1.0](https://github.com/hynek/hatch-fancy-pypi-readme/compare/24.1.0...25.1.0) - 2025-05-01
 

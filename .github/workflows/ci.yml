@@ -15,8 +15,6 @@ concurrency:
 env:
   FORCE_COLOR: "1" # Make tools pretty.
   PYTHONIOENCODING: utf-8
-  PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  PIP_NO_PYTHON_VERSION_WARNING: "1"
 
 permissions: {}
 
@@ -68,10 +66,10 @@ jobs:
       - uses: hynek/setup-cached-uv@34e35d30f1ebc7421a5cc733bca38dcc62603960 # v2.6.0
 
       - run: >
-          uvx --with tox-uv
+          uvx --with tox-uv-bare
           tox run
           --installpkg dist/*.whl
-          -f py$(echo $PYTHON | tr -d .)
+          -f $PYTHON
 
       - name: Upload coverage data
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

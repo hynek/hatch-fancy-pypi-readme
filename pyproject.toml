@@ -5,9 +5,9 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hatch-fancy-pypi-readme"
-version = "25.2.0.dev0"
+version = "26.1.0.dev0"
 description = "Fancy PyPI READMEs with Hatch"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 keywords = ["hatch", "pypi", "readme", "documentation"]
 authors = [{ name = "Hynek Schlawack", email = "hs@ox.cx" }]
 license = "MIT"
@@ -18,13 +18,12 @@ classifiers = [
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Build Tools",
 
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
 ]
 dependencies = ["hatchling", "tomli; python_version<'3.11'"]
 
@@ -70,7 +69,7 @@ branch = true
 source = ["hatch_fancy_pypi_readme"]
 
 [tool.coverage.paths]
-source = ["src", ".tox/py*/**/site-packages"]
+source = ["src", ".tox/3.*/**/site-packages"]
 
 [tool.coverage.report]
 show_missing = true
